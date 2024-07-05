@@ -2,61 +2,41 @@ import { useState, useEffect } from "react";
 import PillButton from "../components/PillButton";
 import { useTheme } from "../hooks/ThemeContext";
 import { View, Text, TextInput, FlatList, StyleSheet } from "react-native";
-import * as SQLite from "expo-sqlite";
+import {useSQLiteContext} from "expo-sqlite/next";
 
 export default function BibleScreen({ navigation }) {
   const { colors } = useTheme();
-  const [book, setBook] = useState("");
-  const books = ["Old Testament", "New Testament", "Both Testaments"];
+  const [cat, setCat] = useState("");
+  const category = ["Old Testament", "New Testament", "Both Testaments"];
   const selection = [];
 
-  // const db = await SQLite.openDatabaseAsync("../assets/database/bible.db");
+  const db = useSQLiteContext();
 
-  // useEffect(() => {
-  //   try {
-  //     const fetchData = async () => {
-  //       let query = "";
-  //       switch (book) {
-  //         case "Old Testament":
-  //           query = "SELECT DISTINCT book_name FROM bible WHERE id <= 39";
-  //           break;
-  //         case "New Testament":
-  //           query = "SELECT DISTINCT book_name FROM bible WHERE id > 39";
-  //           break;
-  //         case "All Books":
-  //           query = "SELECT DISTINCT book_name FROM bible";
-  //           break;
-  //         default:
-  //           query = "SELECT DISTINCT book_name FROM bible";
-  //           break;
-  //       }
-
-  //       const result = await db.getAllSync(query);
-        
-  //       result.forEach((item) => {
-  //         console.log(item);
-  //         selection.push(item.book_name);
-  //       });
-  //     };
-
-  //     fetchData();
-  //   } catch (error) {
-  //     alert("An error occurred while fetching data");  
-  //   }
-  // }, [book]);
+  async function getBooks(cat) {
+    if (cat === "Old Testament") {
+      const result = await db.getAllAsync("SELECT DISTINCT book_name FROM bible WHERE id <= 39");
+    } else if (cat === "New Testament") {
+      const result = await db.getAllAsync("SELECT DISTINCT book_name FROM bible WHERE id > 39");
+    } else {
+      const result = await db.getAllAsync("SELECT DISTINCT book_name FROM bible");
+    };
+    for (let i = 0; i < result.length; i++) {
+      selection.push(result[i].book_name);
+      
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {
-        book === "" ? (
+        cat === "" ? (
           <View style={styles.list}>
             <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>Select a Testament</Text>
             <FlatList
               style={styles.list}
-              data={books}
+              data={category}
               keyExtractor={(item) => item}
               renderItem={({ item }) => (
-                <PillButton text={item} onPress={() => setBook(item)} />
+                <PillButton text={item} onPress={() => setCat(item)} />
               )}
             />
           </View>
@@ -86,8 +66,5 @@ const styles = StyleSheet.create({
   },
   list: {
     width: "100%",
-    flex: 1,
-    alignContent: "center",
-    
   },
 });
