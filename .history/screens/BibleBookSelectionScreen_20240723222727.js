@@ -98,12 +98,14 @@ const styles = StyleSheet.create({
     justifyContent: "top",
     alignItems: "center",
     width: "90%",
-    margin: 20,
+    marginBottom: 20,
   },
   dropdownContainer: {
     flex: 1,
     alignItems: "center",
     width: "100%",
     height: "100%",
+    borderColor: "black",
+    borderWidth: 1,
   },
 });

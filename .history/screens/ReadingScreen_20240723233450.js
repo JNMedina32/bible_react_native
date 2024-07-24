@@ -4,37 +4,37 @@ import { useState, useEffect } from "react";
 import { useSQLiteContext } from "expo-sqlite";
 import PillButton from "../components/PillButton";
 
-export default function ChapterSelection({ route, navigation }) {
+export default function ReadingScreen({ route, navigation }) {
   const { book } = route.params;
   const { colors } = useTheme();
   const db = useSQLiteContext();
-  const [chapters, setChapters] = useState([]);
+  const [chapter, setChapter] = useState(1);
   const [bookText, setBookText] = useState("");
 
-  async function getChapters() {
+  async function getChapters(chapter) {
     setBookText("");
     const result = await db.getAllAsync(
-      `SELECT verse, text FROM bible WHERE book_name = "${book}" ORDER BY id LIMIT 30;`
+      `SELECT verse, text, chapter FROM bible WHERE book_name = ? AND chapter = ?;`,
+      [book, chapter]
     );
-    setChapters(result);
-    for(const chapter of result) {
-      setBookText((prev) => prev + " " + chapter.verse + ". " + chapter.text);
+    for (const book of result) {
+      setBookText((prev) => prev + " " + book.verse + ". " + book.text);
     }
-  };
+  }
+
+  const handleChapter = (chapter) => {
+    
 
   useEffect(() => {
-    getChapters();
-  }, []);
-
+    getChapters(chapter);
+  }, [chapter]);
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]} >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={styles.header}>{book}</Text>
       <ScrollView>
-        <Text style={styles.mainContent}>
-        {bookText}
-
-        </Text>
+        <Text style={styles.chapter}>{chapter}</Text>
+        <Text style={styles.mainContent}>{bookText}</Text>
       </ScrollView>
     </View>
   );
@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
+    fontSize: 23,
+    fontWeight: "bold",
+    margin: 10,
+  },
+  chapter: {
     fontSize: 20,
     fontWeight: "bold",
     margin: 10,
@@ -56,5 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    fontSize: 16,
   },
 });

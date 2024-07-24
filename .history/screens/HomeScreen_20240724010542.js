@@ -51,7 +51,7 @@ export default function HomeScreen({ navigation }) {
                   
                 }}
                 placeholder="Search for a verse"
-                placeholderTextColor={colors.text}
+                
               />
               <EvilIcons name="search" size={24} color="black" />
             </View>

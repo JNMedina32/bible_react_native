@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import BibleBookSelectionScreen from "./screens/BibleBookSelectionScreen";
 import BookmarksScreen from "./screens/BookmarksScreen";
-import ReadingScreen from "./screens/ReadingScreen";
+import ChapterSelection from "./screens/ReadingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +25,8 @@ export default function AppContent() {
         }}
       />
       <Stack.Screen
-        name="ReadingScreen"
-        component={ReadingScreen}
+        name="ChapterSelection"
+        component={ChapterSelection}
         options={{
           title: "Sheep of the Good Shepherd",
         }}

@@ -105,5 +105,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
+    border
+    borderColor: "black",
+    borderWidth: 2,
   },
 });

@@ -23,6 +23,7 @@ export default function HomeScreen({ navigation }) {
     <KeyboardAvoidingView
       style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      enabled={false}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={[styles.inner, { backgroundColor: colors.background }]}>
@@ -48,10 +49,9 @@ export default function HomeScreen({ navigation }) {
                   borderWidth: 1,
                   color: colors.text,
                   placeholderTextColor: colors.text,
-                  
+                  elevation: 5,
                 }}
                 placeholder="Search for a verse"
-                placeholderTextColor={colors.text}
               />
               <EvilIcons name="search" size={24} color="black" />
             </View>

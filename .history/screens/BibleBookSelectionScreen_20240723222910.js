@@ -105,5 +105,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
+
+    borderTop:  "solid",
+    borderStyle: "dotted",
+    borderColor: "black",
+    borderWidth: 2,
   },
 });
