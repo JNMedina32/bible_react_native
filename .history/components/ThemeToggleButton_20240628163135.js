@@ -1,1 +1,0 @@
-import { TouchableOpacity, Text, S } from "react-native";
