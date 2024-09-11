@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "bibleF",
+    "slug": "bibleF",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/sheep.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/sheep.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/sheep.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.sheep.bible"
+    },
+    "web": {
+      "favicon": "./assets/images/sheep.png"
+    },
+    "plugins": [
+      [
+        "expo-asset",
+        {
+          "assets": ["./bible.db"]
+        }
+      ]
+    ]
+  }
+}
