@@ -9,7 +9,7 @@ import { getBibleBooks } from "../services/dbQueries";
 export default function BibleBookSelectionScreen({ navigation }) {
   const { fontSize, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
-  const db = SQLite.useSQLiteContext();
+  // const db = SQLite.useSQLiteContext();
   const [books, setBooks] = useState([]);
   const [selection, setSelection] = useState([]);
   const [dropdownAnim] = useState(new Animated.Value(0));

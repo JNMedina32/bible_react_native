@@ -1,4 +1,19 @@
+import * as SQLite from "expo-sqlite/legacy";
 
+//These variable are used with legacy SQLite3. They were not needed before
+// const db = SQLite.openDatabase("../assets/bible.db");
+// const readOnly = true;
+
+// //This function was a test to see if Legacy SQLite would work 
+// async function getBibleBooksLegacy(func) {
+//   await db.transactionAsync(async (tx) => {
+//     const result = await tx.executeSqlAsync(
+//       `SELECT DISTINCT book_name FROM asvBible ORDER BY id;`,
+//       []
+//     );
+//     func(result);
+//   }, readOnly);
+// }
 
 //These queries were working as intended with the new SQLite3
 async function getBibleBooks(db, func) {

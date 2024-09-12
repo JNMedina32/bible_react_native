@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import AppContent from "./AppContent";
 import FallbackScreen from "./screens/FallbackScreen";
+// import openDatabase from "./services/openDatabase";
 import { GlobalStateProvider } from "./hooks/GlobalStateContext";
 
 export default function App() {

@@ -1,7 +1,4 @@
--- ANY CHANGES TO THE DATABASE REQUIRES AN  UNINSTALL OF EXPO USING: 
--- adb uninstall host.exp.exponent 
--- AND A REINSTALL OF THE APP
--- SEE https://github.com/expo/expo/issues/28176#issuecomment-2105660636 FOR MORE INFO
+-- 
 
 --1. create DB
 sqlite3 bible.db
