@@ -13,9 +13,8 @@ import { getNotes } from "../services/dbQueries";
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 
-
 export default function HomeScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
   const [notes, setNotes] = useState([]);
 
@@ -24,7 +23,6 @@ export default function HomeScreen({ navigation }) {
   const navigationHandler = (screen) => {
     navigation.navigate(screen);
   };
-
 
   return (
     <TouchableWithoutFeedback
@@ -40,7 +38,7 @@ export default function HomeScreen({ navigation }) {
             style={{
               color: colors.text,
               margin: 15,
-              fontSize: fontSize + header.h1,
+              font_size: font_size + header.h1,
               fontWeight: "bold",
               alignItems: "center",
               justifyContent: "center",
@@ -64,7 +62,10 @@ export default function HomeScreen({ navigation }) {
             text="Bookmarks"
             onPress={() => navigationHandler("Bookmarks")}
           />
-          <PillButton text="Notes" onPress={() => navigationHandler("NotesScreen")} />
+          <PillButton
+            text="Notes"
+            onPress={() => navigationHandler("NotesScreen")}
+          />
           <PillButton
             text="Settings"
             onPress={() => navigationHandler("Settings")}

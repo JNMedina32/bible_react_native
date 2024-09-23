@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
       tertiary: '#556b2f',
       danger: 'red',
     },
-    fontSize
+    font_size
     test: {
       borderColor: "black",
       borderWidth: 1,

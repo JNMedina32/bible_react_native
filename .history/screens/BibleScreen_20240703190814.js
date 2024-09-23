@@ -13,7 +13,6 @@ export default function BibleScreen({ navigation }) {
   const db = useSQLiteContext();
 
   async function getBooks(cat) {
-    
     let query = "";
     if (cat === "Old Testament") {
       query = "SELECT * FROM books WHERE testament = 'Old'";
@@ -34,7 +33,7 @@ export default function BibleScreen({ navigation }) {
       {cat === "" ? (
         <View style={styles.list}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a Testament
           </Text>
@@ -50,7 +49,7 @@ export default function BibleScreen({ navigation }) {
       ) : (
         <View style={styles.mainContent}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a book
           </Text>

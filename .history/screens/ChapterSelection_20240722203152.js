@@ -16,17 +16,15 @@ export default function ChapterSelection({ route, navigation }) {
     );
     console.log(result);
     setChapters(result);
-  };
+  }
 
   useEffect(() => {
     getChapters();
   }, []);
 
-
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]} >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text>{book}</Text>
-      
     </View>
   );
 }
@@ -38,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
-    fontSize: 20,
+    font_size: 20,
     fontWeight: "bold",
   },
 });

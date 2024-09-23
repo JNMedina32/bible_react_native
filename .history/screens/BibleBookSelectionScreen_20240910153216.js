@@ -7,7 +7,7 @@ import * as SQLite from "expo-sqlite/next";
 import { getBibleBooks } from "../services/dbQueries";
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = SQLite.useSQLiteContext();
   const [books, setBooks] = useState([]);
@@ -17,9 +17,7 @@ export default function BibleBookSelectionScreen({ navigation }) {
   useEffect(() => {
     async function getBooks() {
       // const openDB = SQLite.openDatabaseAsync(db.databaseName);
-      const result = await db.getAllAsync(
-        `C`
-      );
+      const result = await db.getAllAsync(`C`);
       setBooks(result);
     }
     getBooks();

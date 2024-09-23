@@ -16,11 +16,9 @@ import { getNotes } from "../services/dbQueries";
 
 export default function NotesScreen({ navigation }) {
   const db = useSQLiteContext();
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
   const [notes, setNotes] = useState([]);
-
-
 
   useEffect(() => {
     getNotes(db, setNotes).then(() => {
@@ -29,10 +27,7 @@ export default function NotesScreen({ navigation }) {
   }, []);
 
   return (
-    <TouchableWithoutFeedback
-      onPress={Keyboard.dismiss}
-
-    >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={[{ backgroundColor: colors.background }]}>
         <View style={styles.menuButton}>
           <MenuButton />
@@ -42,7 +37,7 @@ export default function NotesScreen({ navigation }) {
             style={{
               color: colors.text,
               margin: 15,
-              fontSize: fontSize + header.h1,
+              font_size: font_size + header.h1,
               fontWeight: "bold",
               alignItems: "center",
               justifyContent: "center",
@@ -52,14 +47,16 @@ export default function NotesScreen({ navigation }) {
           </Text>
         </View>
         <ScrollView style={styles.mainContent}>
-          <View style={[styles.noteContainer, {borderColor: colors.secondary}]}>
-            <Notes  />
+          <View
+            style={[styles.noteContainer, { borderColor: colors.secondary }]}
+          >
+            <Notes />
           </View>
         </ScrollView>
       </View>
     </TouchableWithoutFeedback>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

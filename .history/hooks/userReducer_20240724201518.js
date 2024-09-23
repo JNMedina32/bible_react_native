@@ -1,5 +1,4 @@
 const initialState = {
   darkMode: false,
-  fontSize: 16,
-  
+  font_size: 16,
 };

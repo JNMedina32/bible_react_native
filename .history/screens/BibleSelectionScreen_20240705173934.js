@@ -12,17 +12,17 @@ export default function BibleSelectionScreen({ navigation }) {
   const category = ["Old Testament", "New Testament", "Both Testaments"];
 
   useEffect(() => {
-    async function getSelection(){
-      const result = await db.getAllAsync("SELECT DISTINCT book_name FROM bible");
+    async function getSelection() {
+      const result = await db.getAllAsync(
+        "SELECT DISTINCT book_name FROM bible"
+      );
     }
   }, []);
-
-
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.mainContent}>
-        <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>
+        <Text style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}>
           Select a book
         </Text>
         <FlatList
@@ -40,7 +40,7 @@ export default function BibleSelectionScreen({ navigation }) {
       {/* {cat === "" ? (
         <View style={styles.list}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a Testament
           </Text>
@@ -56,7 +56,7 @@ export default function BibleSelectionScreen({ navigation }) {
       ) : (
         <View style={styles.mainContent}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a book
           </Text>

@@ -12,8 +12,6 @@ export default function BibleScreen({ navigation }) {
 
   const db = SQLite.openDatabaseAsync("../assets/bible.db");
 
-  
-
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -41,39 +39,48 @@ export default function BibleScreen({ navigation }) {
 
       fetchData();
     } catch (error) {
-      alert("An error occurred while fetching data");  
+      alert("An error occurred while fetching data");
     }
   }, [book]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      {
-        book === "" ? (
-          <View style={styles.list}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>Select a Testament</Text>
-            <FlatList
-              style={styles.list}
-              data={books}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <PillButton text={item} onPress={() => setBook(item)} />
-              )}
-            />
-          </View>
-        ) : (
-          <View style={styles.mainContent}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>Select a book</Text>
-            <FlatList
-              style={styles.list}
-              data={selection}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <PillButton text={item} onPress={() => navigation.navigate("Bookmarks")} />
-              )}
-            />
-          </View>
-        )
-      }
+      {book === "" ? (
+        <View style={styles.list}>
+          <Text
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
+          >
+            Select a Testament
+          </Text>
+          <FlatList
+            style={styles.list}
+            data={books}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <PillButton text={item} onPress={() => setBook(item)} />
+            )}
+          />
+        </View>
+      ) : (
+        <View style={styles.mainContent}>
+          <Text
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
+          >
+            Select a book
+          </Text>
+          <FlatList
+            style={styles.list}
+            data={selection}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <PillButton
+                text={item}
+                onPress={() => navigation.navigate("Bookmarks")}
+              />
+            )}
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -88,6 +95,5 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     alignContent: "center",
-    
   },
 });

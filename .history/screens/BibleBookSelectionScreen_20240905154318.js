@@ -7,7 +7,7 @@ import { useSQLiteContext } from "expo-sqlite";
 import {get}
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = useSQLiteContext();
   const [books, setBooks] = useState([]);

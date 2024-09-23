@@ -12,7 +12,7 @@ export default function ReadingScreen({ route, navigation }) {
   const [chapter, setChapter] = useState(1);
   const [bookText, setBookText] = useState("");
   const [numOfChap, setNumOfChap] = useState(0);
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { header, colors } = theme;
 
   const handleChapter = (param) => {
@@ -38,14 +38,14 @@ export default function ReadingScreen({ route, navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.header, { color: colors.text, fontSize: fontSize + header.h1 }]}>
+      <Text style={[styles.header, { color: colors.text, font_size: font_size + header.h1 }]}>
         {book}
       </Text>
       <ScrollView>
-        <Text style={[styles.chapter, { color: colors.text, fontSize: fontSize + header.h2 }]}>
+        <Text style={[styles.chapter, { color: colors.text, font_size: font_size + header.h2 }]}>
           {chapter}
         </Text>
-        <Text style={[styles.mainContent, { color: colors.text, fontSize: fontSize }]}>
+        <Text style={[styles.mainContent, { color: colors.text, font_size: font_size }]}>
           {bookText}
         </Text>
       </ScrollView>

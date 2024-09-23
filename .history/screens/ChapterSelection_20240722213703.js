@@ -18,25 +18,21 @@ export default function ChapterSelection({ route, navigation }) {
     );
     console.log(result);
     setChapters(result);
-    for(const chapter of result) {
+    for (const chapter of result) {
       setBookText((prev) => prev + chapter.text);
     }
     console.log(bookText);
-  };
+  }
 
   useEffect(() => {
     getChapters();
   }, []);
 
-
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]} >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={styles.header}>{book}</Text>
       <ScrollView>
-        <Text style={styles.mainContent}>
-        {bookText}
-
-        </Text>
+        <Text style={styles.mainContent}>{bookText}</Text>
       </ScrollView>
     </View>
   );
@@ -49,9 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
-    fontSize: 20,
+    font_size: 20,
     fontWeight: "bold",
-    
   },
   mainContent: {
     flex: 1,

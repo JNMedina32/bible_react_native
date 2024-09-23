@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { useGlobalState } from "../hooks/GlobalStateContext";
 
 export default function Notes({title = , note}) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   return (

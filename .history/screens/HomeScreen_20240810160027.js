@@ -12,7 +12,7 @@ import PillButton from "../components/PillButton";
 import SearchBar from "../components/SearchBar";
 
 export default function HomeScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   const navigationHandler = (screen) => {
@@ -25,15 +25,13 @@ export default function HomeScreen({ navigation }) {
       style={[styles.container, { backgroundColor: colors.background }]}
     >
       <View style={[styles.inner, { backgroundColor: colors.background }]}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : un}
-        >
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : un}>
           <View style={styles.headerSection}>
             <Text
               style={{
                 color: colors.text,
                 margin: 15,
-                fontSize: fontSize + header.h1,
+                font_size: font_size + header.h1,
                 fontWeight: "bold",
                 alignItems: "center",
                 justifyContent: "center",

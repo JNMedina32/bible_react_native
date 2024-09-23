@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
-    fontSize: 20,
+    font_size: 20,
     fontWeight: "bold",
   },
 });

@@ -24,16 +24,14 @@ export default function BibleSelectionScreen({ navigation }) {
     }
     try {
       const result = await db.getAllAsync(query);
-      if(result.length > 0){
+      if (result.length > 0) {
         const books = result.map((item) => item.book_name);
         setSelection(books);
-      }else {
+      } else {
         console.log("No books found");
-        se
+        se;
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   return (
@@ -41,7 +39,7 @@ export default function BibleSelectionScreen({ navigation }) {
       {cat === "" ? (
         <View style={styles.list}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a Testament
           </Text>
@@ -57,7 +55,7 @@ export default function BibleSelectionScreen({ navigation }) {
       ) : (
         <View style={styles.mainContent}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a book
           </Text>

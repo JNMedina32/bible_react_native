@@ -4,10 +4,10 @@ import MenuButton from "../components/MenuButton";
 import { useGlobalState } from "../hooks/GlobalStateContext";
 import { View, StyleSheet, Animated, ScrollView } from "react-native";
 import { useSQLiteContext } from "expo-sqlite";
-import {getBibleBooks} from "../services/dbQueries";
+import { getBibleBooks } from "../services/dbQueries";
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = useSQLiteContext();
   const [books, setBooks] = useState([]);

@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
       tertiary: '#556b2f',
       danger: 'red',
     },
-    fontSize: {
+    font_size: {
       h1
     }
     test: {

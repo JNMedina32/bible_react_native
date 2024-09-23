@@ -16,13 +16,13 @@ import { getNotes } from "../services/dbQueries";
 
 export default function NotesScreen({ navigation }) {
   const db = useSQLiteContext();
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
   const [notes, setNotes] = useState([]);
   let testNotes = 5;
 
   useEffect(() => {
-    getNotes(db, 1, setNotes)
+    getNotes(db, 1, setNotes);
   }, []);
 
   return (
@@ -35,7 +35,7 @@ export default function NotesScreen({ navigation }) {
           style={{
             color: colors.text,
             margin: 15,
-            fontSize: fontSize + header.h1,
+            font_size: font_size + header.h1,
             fontWeight: "bold",
             alignItems: "center",
             justifyContent: "center",
@@ -45,11 +45,11 @@ export default function NotesScreen({ navigation }) {
         </Text>
       </View>
       <ScrollView style={styles.mainBody}>
-          <View>
-            {notes.map((note, index) => (
-              <Notes key={index} title={note.title} note={note.note} />
-            ))}
-          </View>
+        <View>
+          {notes.map((note, index) => (
+            <Notes key={index} title={note.title} note={note.note} />
+          ))}
+        </View>
       </ScrollView>
     </View>
   );

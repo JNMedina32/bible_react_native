@@ -2,16 +2,11 @@ import { useState, useEffect } from "react";
 import PillButton from "../components/PillButton";
 import MenuButton from "../components/MenuButton";
 import { useGlobalState } from "../hooks/GlobalStateContext";
-import {
-  View,
-  StyleSheet,
-  Animated,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Animated, ScrollView } from "react-native";
 import { useSQLiteContext } from "expo-sqlite";
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = useSQLiteContext();
   const [books, setBooks] = useState([]);
@@ -50,7 +45,7 @@ export default function BibleBookSelectionScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-            <View style={styles.menuButton}>
+      <View style={styles.menuButton}>
         <MenuButton />
       </View>
       <View style={styles.buttonContainer}>
@@ -93,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "top",
     alignItems: "center",
-    top
+    top,
   },
   menuButton: {
     position: "absolute",

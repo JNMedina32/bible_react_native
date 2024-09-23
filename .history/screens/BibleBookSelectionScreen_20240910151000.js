@@ -7,7 +7,7 @@ import * as SQLite from "expo-sqlite/next";
 import { getBibleBooks } from "../services/dbQueries";
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = SQLite.useSQLiteContext();
   const [books, setBooks] = useState([]);
@@ -15,7 +15,7 @@ export default function BibleBookSelectionScreen({ navigation }) {
   const [dropdownAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    async 
+    async;
     // getBibleBooks(db, setBooks);
   }, []);
 

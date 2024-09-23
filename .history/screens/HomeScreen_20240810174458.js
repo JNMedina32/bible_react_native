@@ -6,14 +6,14 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   KeyboardAvoidingViewBase,
-  K
+  K,
 } from "react-native";
 import { useGlobalState } from "../hooks/GlobalStateContext";
 import PillButton from "../components/PillButton";
 import SearchBar from "../components/SearchBar";
 
 export default function HomeScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   const navigationHandler = (screen) => {
@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }) {
             style={{
               color: colors.text,
               margin: 15,
-              fontSize: fontSize + header.h1,
+              font_size: font_size + header.h1,
               fontWeight: "bold",
               alignItems: "center",
               justifyContent: "center",

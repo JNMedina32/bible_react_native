@@ -19,14 +19,14 @@ export const ThemeProvider = ({ children }) => {
       text: isDarkTheme ? "#e0e0e0" : "#333333",
       primary: isDarkTheme ? "#a6a1ff" : "#6c63ff",
       secondary: isDarkTheme ? "#ffc700" : "#Ffd700",
-      tertiary: '#556b2f',
-      danger: 'red',
-      fontSize: 16,
+      tertiary: "#556b2f",
+      danger: "red",
+      font_size: 16,
     },
     test: {
       borderColor: "black",
       borderWidth: 1,
-    }
+    },
   };
 
   return (

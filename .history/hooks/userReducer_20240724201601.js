@@ -1,10 +1,8 @@
 const initialState = {
   darkMode: false,
-  fontSize: 16,
+  font_size: 16,
   translation: "ASV",
   notifications: true,
 };
 
-const userReducer = (state, action) => {
-  
-};
+const userReducer = (state, action) => {};

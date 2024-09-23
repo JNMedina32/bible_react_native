@@ -35,7 +35,7 @@ export default function BibleSelectionScreen({ navigation }) {
       {cat === "" ? (
         <View style={styles.list}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a Testament
           </Text>
@@ -51,7 +51,7 @@ export default function BibleSelectionScreen({ navigation }) {
       ) : (
         <View style={styles.mainContent}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a book
           </Text>

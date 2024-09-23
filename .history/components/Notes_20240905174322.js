@@ -2,13 +2,13 @@ import { View, Text, StyleSheet } from "react-native";
 import { useGlobalState } from "../hooks/GlobalStateContext";
 
 export default function Notes(title = "Title here", note = "") {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.noteTitle}>{{title}}</Text>
+        <Text style={styles.noteTitle}>{{ title }}</Text>
       </View>
       <View>
         <Text style={styles.note}>{note}</Text>
@@ -23,5 +23,4 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
-
 });

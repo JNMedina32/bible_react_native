@@ -52,7 +52,7 @@ export default function BibleScreen({ navigation }) {
       {
         book === "" ? (
           <View style={styles.list}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>Select a Testament</Text>
+            <Text style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}>Select a Testament</Text>
             <FlatList
               style={styles.list}
               data={books}
@@ -64,7 +64,7 @@ export default function BibleScreen({ navigation }) {
           </View>
         ) : (
           <View style={styles.mainContent}>
-            <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>Select a book</Text>
+            <Text style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}>Select a book</Text>
             <FlatList
               style={styles.list}
               data={selection}

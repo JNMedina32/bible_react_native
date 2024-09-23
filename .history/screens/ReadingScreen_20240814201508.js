@@ -12,7 +12,7 @@ export default function ReadingScreen({ route, navigation }) {
   const [chapter, setChapter] = useState(1);
   const [bookText, setBookText] = useState("");
   const [numOfChap, setNumOfChap] = useState(0);
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { header, colors } = theme;
 
   const handleChapter = (param) => {
@@ -44,7 +44,7 @@ export default function ReadingScreen({ route, navigation }) {
       <Text
         style={[
           styles.header,
-          { color: colors.text, fontSize: fontSize + header.h1 },
+          { color: colors.text, font_size: font_size + header.h1 },
         ]}
       >
         {book}
@@ -53,7 +53,7 @@ export default function ReadingScreen({ route, navigation }) {
         <Text
           style={[
             styles.chapter,
-            { color: colors.text, fontSize: fontSize + header.h2 },
+            { color: colors.text, font_size: font_size + header.h2 },
           ]}
         >
           {chapter}
@@ -61,7 +61,7 @@ export default function ReadingScreen({ route, navigation }) {
         <Text
           style={[
             styles.mainContent,
-            { color: colors.text, fontSize: fontSize },
+            { color: colors.text, font_size: font_size },
           ]}
         >
           {bookText}

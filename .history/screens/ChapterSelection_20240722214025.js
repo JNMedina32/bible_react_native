@@ -17,24 +17,20 @@ export default function ChapterSelection({ route, navigation }) {
       `SELECT verse, text FROM bible WHERE book_name = "${book}" ORDER BY id LIMIT 30;`
     );
     setChapters(result);
-    for(const chapter of result) {
-      setBookText((prev) => prev + " " + chapter.verse+ " " + chapter.text);
+    for (const chapter of result) {
+      setBookText((prev) => prev + " " + chapter.verse + " " + chapter.text);
     }
-  };
+  }
 
   useEffect(() => {
     getChapters();
   }, []);
 
-
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]} >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={styles.header}>{book}</Text>
       <ScrollView>
-        <Text style={styles.mainContent}>
-        {bookText}
-
-        </Text>
+        <Text style={styles.mainContent}>{bookText}</Text>
       </ScrollView>
     </View>
   );
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
-    fontSize: 20,
+    font_size: 20,
     fontWeight: "bold",
     margin: 10,
   },

@@ -22,7 +22,7 @@ export default function BibleScreen({ navigation }) {
       query = "SELECT * FROM books";
     }
     const result = await db.getAllAsync(query);
-    
+
     for (let i = 0; i < result.length; i++) {
       selection.push(result[i].book_name);
     }
@@ -33,7 +33,7 @@ export default function BibleScreen({ navigation }) {
       {cat === "" ? (
         <View style={styles.list}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a Testament
           </Text>
@@ -49,7 +49,7 @@ export default function BibleScreen({ navigation }) {
       ) : (
         <View style={styles.mainContent}>
           <Text
-            style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}
+            style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}
           >
             Select a book
           </Text>

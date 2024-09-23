@@ -11,12 +11,10 @@ export default function BibleSelectionScreen({ navigation }) {
   const [selection, setSelection] = useState([]);
   const category = ["Old Testament", "New Testament", "Both Testaments"];
 
-
-
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.mainContent}>
-        <Text style={{ color: colors.text, fontSize: 20, fontWeight: "bold" }}>
+        <Text style={{ color: colors.text, font_size: 20, fontWeight: "bold" }}>
           Select a book
         </Text>
         <FlatList

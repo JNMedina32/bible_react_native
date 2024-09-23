@@ -12,7 +12,7 @@ import PillButton from "../components/PillButton";
 import SearchBar from "../components/SearchBar";
 
 export default function HomeScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   const navigationHandler = (screen) => {
@@ -28,22 +28,22 @@ export default function HomeScreen({ navigation }) {
         {/* <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         > */}
-          <View style={styles.headerSection}>
-            <Text
-              style={{
-                color: colors.text,
-                margin: 15,
-                fontSize: fontSize + header.h1,
-                fontWeight: "bold",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Welcome to the Bible App
-            </Text>
+        <View style={styles.headerSection}>
+          <Text
+            style={{
+              color: colors.text,
+              margin: 15,
+              font_size: font_size + header.h1,
+              fontWeight: "bold",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Welcome to the Bible App
+          </Text>
 
-            <SearchBar placeholder="Search a verse, book, chapter, or keyword" />
-          </View>
+          <SearchBar placeholder="Search a verse, book, chapter, or keyword" />
+        </View>
         {/* </KeyboardAvoidingView> */}
 
         <View style={styles.mainContent}>

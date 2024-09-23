@@ -3,7 +3,7 @@ import { useTheme } from "../hooks/ThemeContext";
 import { useState, useEffect } from "react";
 import { useSQLiteContext } from "expo-sqlite";
 import PillButton from "../components/PillButton";
-import {  } from "react-native-reanimated/lib/typescript/Animated";
+import {} from "react-native-reanimated/lib/typescript/Animated";
 
 export default function ChapterSelection({ route, navigation }) {
   const { book } = route.params;
@@ -17,19 +17,16 @@ export default function ChapterSelection({ route, navigation }) {
     );
     console.log(result);
     setChapters(result);
-  };
+  }
 
   useEffect(() => {
     getChapters();
   }, []);
 
-
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]} >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={styles.header}>{book}</Text>
-      <ScrollView>
-
-      </ScrollView>
+      <ScrollView></ScrollView>
     </View>
   );
 }
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "top",
   },
   header: {
-    fontSize: 20,
+    font_size: 20,
     fontWeight: "bold",
   },
 });

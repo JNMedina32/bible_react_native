@@ -12,7 +12,7 @@ const GlobalDispatchContext = createContext();
 
 const initialState = {
   darkMode: false,
-  fontSize: 16,
+  font_size: 16,
   translation: "American Standard Version",
   notifications: true,
 };
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
     // case "TOGGLE_THEME":
     //   return { ...state, darkMode: !state.darkMode };
     case "SET_FONT_SIZE":
-      return { ...state, fontSize: action.payload };
+      return { ...state, font_size: action.payload };
     case "SET_TRANSLATION":
       return { ...state, translation: action.payload };
     case "TOGGLE_NOTIFICATIONS":
@@ -36,7 +36,6 @@ export const GlobalStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const colorScheme = useColorScheme();
 
-
   useEffect(() => {
     dispatch({ type: "TOGGLE_THEME" });
   }, [colorScheme]);
@@ -44,8 +43,8 @@ export const GlobalStateProvider = ({ children }) => {
   const theme = {
     colors: {
       background: state.darkMode ? "#2e2e2e" : "#fdf6e3",
-      text: state.darkMode  ? "#e0e0e0" : "#333333",
-      primary: state.darkMode  ? "#a6a1ff" : "#6c63ff",
+      text: state.darkMode ? "#e0e0e0" : "#333333",
+      primary: state.darkMode ? "#a6a1ff" : "#6c63ff",
       secondary: state.darkMode ? "#ffc700" : "#Ffd700",
       tertiary: "#556b2f",
       danger: "red",

@@ -17,11 +17,11 @@ import { useSQLiteContext } from "expo-sqlite";
 export default function SettingsScreen({ navigation }) {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const { fontSize, theme, darkMode, translation, notifications } =
+  const { font_size, theme, darkMode, translation, notifications } =
     useGlobalState();
   const { colors, header } = theme;
   const [showChoices, setShowChoices] = useState(0);
-  const [selectedFontSize, setSelectedFontSize] = useState(fontSize);
+  const [selectedFontSize, setSelectedFontSize] = useState(font_size);
   const [selectedTranslation, setSelectedTranslation] = useState("ASV");
   const [selectedNotifications, setSelectedNotifications] =
     useState(notifications);
@@ -46,7 +46,7 @@ export default function SettingsScreen({ navigation }) {
 
   useEffect(() => {
     if (
-      selectedFontSize !== fontSize ||
+      selectedFontSize !== font_size ||
       selectedTranslation !== translation ||
       selectedNotifications !== notifications
     ) {
@@ -74,14 +74,18 @@ export default function SettingsScreen({ navigation }) {
       <Text
         style={[
           styles.header,
-          { color: colors.text, fontSize: fontSize + header.h1 },
+          { color: colors.text, font_size: font_size + header.h1 },
         ]}
       >
         Settings
       </Text>
       <ThemeToggleButton />
       <View>
-      <Text style={[{color: colors.text, fontSize: fontSize + header.h3}]}>Change Font Size: </Text>
+        <Text
+          style={[{ color: colors.text, font_size: font_size + header.h3 }]}
+        >
+          Change Font Size:{" "}
+        </Text>
       </View>
 
       <PillButton
@@ -96,7 +100,7 @@ export default function SettingsScreen({ navigation }) {
         <Text
           style={[
             styles.header,
-            { color: colors.text, fontSize: selectedFontSize + header.h1 },
+            { color: colors.text, font_size: selectedFontSize + header.h1 },
           ]}
         >
           {testText.book}
@@ -104,7 +108,7 @@ export default function SettingsScreen({ navigation }) {
         <Text
           style={[
             styles.chapter,
-            { color: colors.text, fontSize: selectedFontSize + header.h2 },
+            { color: colors.text, font_size: selectedFontSize + header.h2 },
           ]}
         >
           {testText.chapter}
@@ -112,7 +116,7 @@ export default function SettingsScreen({ navigation }) {
         <Text
           style={[
             styles.mainContent,
-            { color: colors.text, fontSize: selectedFontSize },
+            { color: colors.text, font_size: selectedFontSize },
           ]}
         >
           {bookText}

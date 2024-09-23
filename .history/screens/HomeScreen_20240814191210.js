@@ -14,7 +14,7 @@ import SearchBar from "../components/SearchBar";
 import MenuButton from "../components/MenuButton";
 
 export default function HomeScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
 
   const navigationHandler = (screen) => {
@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }) {
       style={[styles.container, { backgroundColor: colors.background }]}
     >
       <View style={[styles.inner, { backgroundColor: colors.background }]}>
-        <View >
+        <View>
           <MenuButton />
         </View>
         <View style={styles.headerSection}>
@@ -35,7 +35,7 @@ export default function HomeScreen({ navigation }) {
             style={{
               color: colors.text,
               margin: 15,
-              fontSize: fontSize + header.h1,
+              font_size: font_size + header.h1,
               fontWeight: "bold",
               alignItems: "center",
               justifyContent: "center",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  
+
   inner: {
     padding: 16,
     height: "100%",

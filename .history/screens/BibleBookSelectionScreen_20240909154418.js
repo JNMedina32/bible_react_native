@@ -7,7 +7,7 @@ import * as SQLite from "expo-sqlite/next";
 import { getBibleBooks } from "../services/dbQueries";
 
 export default function BibleBookSelectionScreen({ navigation }) {
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, fontSizing } = theme;
   const db = SQLite.useSQLiteContext();
   const [books, setBooks] = useState([]);
@@ -38,43 +38,50 @@ export default function BibleBookSelectionScreen({ navigation }) {
   };
 
   return (
-    <SQLite.SQLiteProvider databaseName="bible.db" assetSource={{ assetId: require('../assets/bible.db') }} useNewConnection={true} useSuspense={true}>
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={styles.menuButton}>
-        <MenuButton />
+    <SQLite.SQLiteProvider
+      databaseName="bible.db"
+      assetSource={{ assetId: require("../assets/bible.db") }}
+      useNewConnection={true}
+      useSuspense={true}
+    >
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.menuButton}>
+          <MenuButton />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PillButton
+            text={"Old Testament"}
+            onPress={() => handleSelection("Old Testament")}
+          />
+          <PillButton
+            text={"New Testament"}
+            onPress={() => handleSelection("New Testament")}
+          />
+        </View>
+        <View style={styles.dropdownContainer}>
+          <Animated.View
+            style={{
+              height: dropdownAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 500],
+              }),
+            }}
+          >
+            <ScrollView style={{}}>
+              {selection.length > 0 &&
+                selection.map((book, index) => (
+                  <PillButton
+                    key={index}
+                    text={book}
+                    onPress={() =>
+                      navigation.navigate("ReadingScreen", { book })
+                    }
+                  />
+                ))}
+            </ScrollView>
+          </Animated.View>
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <PillButton
-          text={"Old Testament"}
-          onPress={() => handleSelection("Old Testament")}
-        />
-        <PillButton
-          text={"New Testament"}
-          onPress={() => handleSelection("New Testament")}
-        />
-      </View>
-      <View style={styles.dropdownContainer}>
-        <Animated.View
-          style={{
-            height: dropdownAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 500],
-            }),
-          }}
-        >
-          <ScrollView style={{}}>
-            {selection.length > 0 &&
-              selection.map((book, index) => (
-                <PillButton
-                  key={index}
-                  text={book}
-                  onPress={() => navigation.navigate("ReadingScreen", { book })}
-                />
-              ))}
-          </ScrollView>
-        </Animated.View>
-      </View>
-    </View>
     </SQLite.SQLiteProvider>
   );
 }

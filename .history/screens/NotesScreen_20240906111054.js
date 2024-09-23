@@ -16,11 +16,10 @@ import { getNotes } from "../services/dbQueries";
 
 export default function NotesScreen({ navigation }) {
   const db = useSQLiteContext();
-  const { fontSize, theme } = useGlobalState();
+  const { font_size, theme } = useGlobalState();
   const { colors, header } = theme;
   const [notes, setNotes] = useState([]);
   let testNotes = 5;
-
 
   useEffect(() => {
     getNotes(db, setNotes).then(() => {
@@ -29,32 +28,28 @@ export default function NotesScreen({ navigation }) {
   }, []);
 
   return (
-
-      <View style={[styles.container,{ backgroundColor: colors.background }]}>
-        <View style={styles.menuButton}>
-          <MenuButton />
-        </View>
-        <View style={styles.headerSection}>
-          <Text
-            style={{
-              color: colors.text,
-              margin: 15,
-              fontSize: fontSize + header.h1,
-              fontWeight: "bold",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            Notes
-          </Text>
-        </View>
-        <ScrollView style={styles.mainBody}>
-          
-        </ScrollView>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.menuButton}>
+        <MenuButton />
       </View>
-
+      <View style={styles.headerSection}>
+        <Text
+          style={{
+            color: colors.text,
+            margin: 15,
+            font_size: font_size + header.h1,
+            fontWeight: "bold",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Notes
+        </Text>
+      </View>
+      <ScrollView style={styles.mainBody}></ScrollView>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
