@@ -8,7 +8,7 @@ sqlite3 assets/bible.db
 
 --2. create tables
 
-------------------AMERICAN STANDARD VERSION------------------
+
 CREATE TABLE IF NOT EXISTS asvBible (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     book_name TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS akjvBible (
 );
 
 ------------------BIBLE VERSIONS------------------
-CREATE TABLE IF NOT EXISTS bibleTranslations(
+CREATE TABLE IF NOT EXISTS bibleVersions(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     version_name TEXT,
     version_code TEXT
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS userSettings(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
-    bible_translation TEXT DEFAULT 'American Standard Version',
+    bible_version TEXT DEFAULT 'American Standard Version',
     font_size INTEGER DEFAULT 16,
     notifications BOOLEAN DEFAULT 0,
     notification_time TEXT DEFAULT '08:00',

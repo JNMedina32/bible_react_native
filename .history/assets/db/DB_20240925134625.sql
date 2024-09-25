@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS akjvBible (
 );
 
 ------------------BIBLE VERSIONS------------------
-CREATE TABLE IF NOT EXISTS bibleTranslations(
+CREATE TABLE IF NOT EXISTS bibleVersions(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     version_name TEXT,
     version_code TEXT
