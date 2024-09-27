@@ -29,7 +29,7 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    
+    console.log(userSettings);
     if (userSettings) {
       dispatch({ type: "INITIAL_USER_STATE", payload: userSettings });
     }

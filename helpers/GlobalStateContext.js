@@ -16,8 +16,8 @@ const initialState = {
   font_size: 16,
   translation: "American Standard Version",
   notifications: false,
-  notificationsTime: "12:00",
-  notificationsDays: [1, 2, 3, 4, 5, 6, 7],
+  notification_time: "12:00",
+  notification_days: [1, 2, 3, 4, 5, 6, 7],
   user_id: 1,
 };
 

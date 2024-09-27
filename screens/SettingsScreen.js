@@ -20,7 +20,7 @@ import { useSQLiteContext } from "expo-sqlite";
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const { font_size, theme, translation, notifications, notificationsTime, notificationsDays } = useGlobalState();
+  const { font_size, theme, translation, notifications, notification_time, notification_days } = useGlobalState();
   const dispatch = useGlobalDispatch();
   const { colors, header } = theme;
   const [selectedFontSize, setSelectedFontSize] = useState(font_size);
@@ -85,7 +85,7 @@ export default function SettingsScreen() {
     }
   }, [selectedFontSize, selectedTranslation, selectedNotifications]);
 
-  console.log(notifications);
+
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

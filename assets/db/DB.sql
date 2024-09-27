@@ -53,8 +53,7 @@ CREATE TABLE IF NOT EXISTS users(
 
 ------------------USER SETTINGS------------------
 CREATE TABLE IF NOT EXISTS userSettings(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     bible_translation TEXT DEFAULT 'American Standard Version',
     font_size INTEGER DEFAULT 16,
     notifications BOOLEAN DEFAULT 0,
