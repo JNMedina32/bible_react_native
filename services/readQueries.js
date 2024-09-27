@@ -34,15 +34,7 @@ async function getVerses(db, book, chapter, fromVerse, toVerse, func) {
 }
 
 async function getUserSettings(db, user_id, func) {
-  const userSettings = {
-    darkMode: false,
-    font_size: 16,
-    translation: "American Standard Version",
-    notifications: false,
-    notificationsTime: "12:00",
-    notificationsDays: [1, 2, 3, 4, 5, 6, 7],
-    user_id: 1,
-  };
+
   const result = await db.getAllAsync(
     `SELECT * FROM userSettings WHERE user_id = ?;`,
     [user_id]

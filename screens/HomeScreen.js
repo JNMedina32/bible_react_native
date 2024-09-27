@@ -29,9 +29,11 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (userSettings.font_size) {
-      dispatch({ type: "SET_FONT_SIZE", payload: userSettings.font_size });
+    
+    if (userSettings) {
+      dispatch({ type: "INITIAL_USER_STATE", payload: userSettings });
     }
+    
   }, [userSettings]);
 
   return (
