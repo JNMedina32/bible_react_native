@@ -15,12 +15,21 @@ import {
 } from "../helpers/GlobalStateContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { getVerses } from "../services/readQueries";
+import { saveSettings } from "../services/writeQueries";
 import { useSQLiteContext } from "expo-sqlite";
 
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const { font_size, theme, translation, notifications, notification_time, notification_days } = useGlobalState();
+  const {
+    font_size,
+    theme,
+    translation,
+    notifications,
+    notification_time,
+    notification_days,
+    user_id,
+  } = useGlobalState();
   const dispatch = useGlobalDispatch();
   const { colors, header } = theme;
   const [selectedFontSize, setSelectedFontSize] = useState(font_size);
@@ -28,6 +37,10 @@ export default function SettingsScreen() {
   const [selectedNotifications, setSelectedNotifications] = useState(
     notifications ? true : false
   );
+  const [selectedNotificationDays, setSelectedNotificationDays] =
+    useState(notification_days);
+  const [selectedNotificationTime, setSelectedNotificationTime] =
+    useState(notification_time);
   const [bookText, setBookText] = useState("");
   const testText = {
     book: "Matthew",
@@ -55,11 +68,15 @@ export default function SettingsScreen() {
   };
 
   const handleSave = () => {
-    let settings = {
-      fontSize: selectedFontSize,
-      translation: selectedTranslation,
+    let newSettings = {
+      font_size: selectedFontSize,
+      bible_translation: selectedTranslation,
       notifications: selectedNotifications,
+      notification_days: selectedNotificationDays,
+      notification_time: selectedNotificationTime,
+      user_id: user_id,
     };
+    saveSettings(db, newSettings, dispatch);
   };
 
   useEffect(() => {
@@ -84,8 +101,6 @@ export default function SettingsScreen() {
       setSettingsChanged(false);
     }
   }, [selectedFontSize, selectedTranslation, selectedNotifications]);
-
-
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -196,7 +211,7 @@ export default function SettingsScreen() {
       {settingsChanged && (
         <View style={styles.saveContainer}>
           <View>
-            <PillButton text="Save" onPress={() => alert("Button pressed!")} />
+            <PillButton text="Save" onPress={() => handleSave()} />
           </View>
           <View>
             <PillButton

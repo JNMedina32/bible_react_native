@@ -16,19 +16,19 @@ export default function ReadingScreen({ route, navigation }) {
   const { header, colors } = theme;
 
   const handleChapter = (param) => {
-    if (param === "next" && chapter === numOfChap) {
-      return;
-    } else if (param === "previous" && chapter === 1) {
-      return;
-    }
-    if (param === "next") {
-      setChapter(chapter + 1);
-    } else {
-      setChapter(chapter - 1);
-    }
+    setChapter((prevChapter) => {
+      if (param === "next" && prevChapter === numOfChap) {
+        return prevChapter; // No change if at the last chapter
+      } else if (param === "previous" && prevChapter === 1) {
+        return prevChapter; // No change if at the first chapter
+      }
+      return param === "next" ? prevChapter + 1 : prevChapter - 1;
+    });
   };
+  
 
   useEffect(() => {
+    setBookText("");
     getChapters(db, book, chapter, setBookText);
   }, [chapter]);
 
@@ -47,17 +47,9 @@ export default function ReadingScreen({ route, navigation }) {
           { color: colors.text, fontSize: font_size + header.h1 },
         ]}
       >
-        {book}
+        {book} | {chapter}
       </Text>
       <ScrollView>
-        <Text
-          style={[
-            styles.chapter,
-            { color: colors.text, fontSize: font_size + header.h2 },
-          ]}
-        >
-          {chapter}
-        </Text>
         <Text
           style={[
             styles.mainContent,

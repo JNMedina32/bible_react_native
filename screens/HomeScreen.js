@@ -26,7 +26,8 @@ export default function HomeScreen({ navigation }) {
 
   useEffect(() => {
     getUserSettings(db, 1, setUserSettings);
-  }, []);
+    console.log("User settings: ", userSettings);
+  }, [font_size]);
 
   useEffect(() => {
     console.log(userSettings);
