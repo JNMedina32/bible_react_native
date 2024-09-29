@@ -24,7 +24,7 @@ export default function SettingsScreen() {
   const {
     font_size,
     theme,
-    translation,
+    bible_translation,
     notifications,
     notification_time,
     notification_days,
@@ -33,12 +33,12 @@ export default function SettingsScreen() {
   const dispatch = useGlobalDispatch();
   const { colors, header } = theme;
   const [selectedState, setSelectedState] = useState({
-    font_size: font_size,
-    translation: translation,
-    notifications: notifications,
-    notification_time: notification_time,
-    notification_days: notification_days,
-    user_id: user_id,
+    font_size: 16,
+    bible_translation: "American Standard Version",
+    notifications: false,
+    notification_time: "12:00",
+    notification_days: [1,2,3,4,5,6,7],
+    user_id: 1,
   });
   const [bookText, setBookText] = useState("");
   const testText = {
@@ -69,6 +69,7 @@ export default function SettingsScreen() {
 
   const handleSave = () => {
     saveSettings(db, selectedState, dispatch);
+    // dispatch({ type: "INITIAL_USER_STATE", payload: selectedState });
   };
 
   useEffect(() => {
@@ -80,12 +81,12 @@ export default function SettingsScreen() {
       testText.toVerse,
       setBookText
     );
-  }, [selectedState.translation]);
+  }, []);
 
   useEffect(() => {
     if (
       selectedState.font_size !== font_size ||
-      selectedState.translation !== translation ||
+      selectedState.bible_translation !== bible_translation ||
       selectedState.notifications !== notifications
     ) {
       setSettingsChanged(true);
@@ -93,6 +94,17 @@ export default function SettingsScreen() {
       setSettingsChanged(false);
     }
   }, [selectedState]);
+
+  useEffect(() => {
+    setSelectedState({
+      font_size: font_size,
+      bible_translation: bible_translation,
+      notifications: notifications,
+      notification_time: notification_time,
+      notification_days: notification_days,
+      user_id: user_id,
+    });
+  },[]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -151,7 +163,7 @@ export default function SettingsScreen() {
             { color: colors.text, fontSize: font_size + header.h4 },
           ]}
         >
-          {translation}
+          {bible_translation}
         </Text>
       </View>
       <View style={styles.settingsContainer}>

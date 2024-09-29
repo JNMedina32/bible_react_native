@@ -13,7 +13,7 @@ const GlobalDispatchContext = createContext();
 const initialState = {
   darkMode: false,
   font_size: 16,
-  translation: "American Standard Version",
+  bible_translation: "American Standard Version",
   notifications: false,
   notification_time: "12:00",
   notification_days: [1, 2, 3, 4, 5, 6, 7],
@@ -27,7 +27,7 @@ const reducer = (state, action) => {
     case "SET_FONT_SIZE":
       return { ...state, font_size: action.payload };
     case "SET_TRANSLATION":
-      return { ...state, translation: action.payload };
+      return { ...state, bible_translation: action.payload };
     case "TOGGLE_NOTIFICATIONS":
       return { ...state, notifications: !state.notifications };
     case "SET_NOTIFICATIONS_TIME":
@@ -35,6 +35,7 @@ const reducer = (state, action) => {
     case "SET_NOTIFICATIONS_DAYS":
       return { ...state, notificationsDays: action.payload };
     case "INITIAL_USER_STATE":
+      console.log("action.payload: ", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;

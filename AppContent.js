@@ -39,7 +39,7 @@ export default function AppContent() {
       }
     }
     loadUserSettings();
-  }, [user_id, font_size, translation]);
+  }, []);
 
   // Hide the splash screen when the app is ready
   const onLayoutRootView = useCallback(async () => {
