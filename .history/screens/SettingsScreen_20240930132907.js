@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   TouchableWithoutFeedback,
-  Pressable,
 } from "react-native";
 import PillButton from "../components/PillButton";
 import ThemeToggleButton from "../components/ThemeToggleButton";
@@ -18,12 +17,10 @@ import { FontAwesome } from "@expo/vector-icons";
 import { getVerses } from "../services/readQueries";
 import { saveSettings } from "../services/writeQueries";
 import { useSQLiteContext } from "expo-sqlite";
-import ModalComponent from "../components/Modal";
 
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const [modalVisible, setModalVisble] = useState(false);
   const {
     font_size,
     theme,
@@ -40,7 +37,7 @@ export default function SettingsScreen() {
     bible_translation: "American Standard Version",
     notifications: false,
     notification_time: "12:00",
-    notification_days: [1, 2, 3, 4, 5, 6, 7],
+    notification_days: [1,2,3,4,5,6,7],
     user_id: 1,
   });
   const [bookText, setBookText] = useState("");
@@ -76,7 +73,6 @@ export default function SettingsScreen() {
   };
 
   useEffect(() => {
-    setBookText("");
     getVerses(
       db,
       testText.book,
@@ -108,18 +104,17 @@ export default function SettingsScreen() {
       notification_time: notification_time,
       user_id: user_id,
     });
-  }, []);
+  },[]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ModalComponent visible={modalVisible} setModalVisible={setModalVisble} />
       <View style={styles.menuButton}>
         <MenuButton />
       </View>
       <Text
         style={[
           styles.header,
-          { color: colors.text, fontSize: 16 + header.h1 },
+          { color: colors.text, fontSize: font_size + header.h1 },
         ]}
       >
         Settings
@@ -129,10 +124,10 @@ export default function SettingsScreen() {
         <Text
           style={[
             styles.settingsText,
-            { color: colors.text, fontSize: 16 + header.h4 },
+            { color: colors.text, fontSize: font_size + header.h4 },
           ]}
         >
-          Reading Font Size:
+          Reading Font Size:{" "}
         </Text>
         <View style={{ flexDirection: "row" }}>
           <View style={{ marginRight: 20 }}>
@@ -157,27 +152,25 @@ export default function SettingsScreen() {
         <Text
           style={[
             styles.settingsText,
-            { color: colors.text, fontSize: 16 + header.h4 },
+            { color: colors.text, fontSize: font_size + header.h4 },
           ]}
         >
           Translation:
         </Text>
-        <Pressable>
-          <Text
-            style={[
-              styles.settingsText,
-              { color: colors.text, fontSize: 16 + header.h4 },
-            ]}
-          >
-            {bible_translation}
-          </Text>
-        </Pressable>
+        <Text
+          style={[
+            styles.settingsText,
+            { color: colors.text, fontSize: font_size + header.h4 },
+          ]}
+        >
+          {bible_translation}
+        </Text>
       </View>
       <View style={styles.settingsContainer}>
         <Text
           style={[
             styles.settingsText,
-            { color: colors.text, fontSize: 16 + header.h4 },
+            { color: colors.text, fontSize: font_size + header.h4 },
           ]}
         >
           Notifications:
@@ -186,7 +179,7 @@ export default function SettingsScreen() {
           <Text
             style={[
               styles.settingsText,
-              { color: colors.text, fontSize: 16 + header.h4 },
+              { color: colors.text, fontSize: font_size + header.h4 },
             ]}
           >
             {selectedState.notifications ? "On" : "Off"}
@@ -197,10 +190,7 @@ export default function SettingsScreen() {
         <Text
           style={[
             styles.header,
-            {
-              color: colors.text,
-              fontSize: selectedState.font_size + header.h1,
-            },
+            { color: colors.text, fontSize: selectedState.font_size + header.h1 },
           ]}
         >
           {testText.book}
@@ -208,10 +198,7 @@ export default function SettingsScreen() {
         <Text
           style={[
             styles.chapter,
-            {
-              color: colors.text,
-              fontSize: selectedState.font_size + header.h2,
-            },
+            { color: colors.text, fontSize: selectedState.font_size + header.h2 },
           ]}
         >
           {testText.chapter}

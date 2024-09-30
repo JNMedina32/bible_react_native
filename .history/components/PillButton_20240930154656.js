@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, Pressable } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 
 const PillButton = ({ text, onPress }) => {

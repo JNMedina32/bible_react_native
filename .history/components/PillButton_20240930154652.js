@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, Pressable } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 
 const PillButton = ({ text, onPress }) => {
@@ -6,7 +6,7 @@ const PillButton = ({ text, onPress }) => {
   const { header, colors } = theme;
 
   return (
-    <Pressable
+    <TPressable
       style={[
         styles.button,
         { backgroundColor: colors.background, borderColor: colors.secondary },

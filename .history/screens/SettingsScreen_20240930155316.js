@@ -23,7 +23,7 @@ import ModalComponent from "../components/Modal";
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const [modalVisible, setModalVisble] = useState(false);
+  const [translationModal, setTranslationModal] = useState(false);
   const {
     font_size,
     theme,
@@ -112,7 +112,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ModalComponent visible={modalVisible} setModalVisible={setModalVisble} />
+      
       <View style={styles.menuButton}>
         <MenuButton />
       </View>

@@ -112,7 +112,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ModalComponent visible={modalVisible} setModalVisible={setModalVisble} />
+      <ModalComponent visible={modalVisible} setVisible={setModalVisble} />
       <View style={styles.menuButton}>
         <MenuButton />
       </View>

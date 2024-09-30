@@ -11,7 +11,7 @@ const GlobalStateContext = createContext();
 const GlobalDispatchContext = createContext();
 
 const initialState = {
-  colorMode: 'light',
+  darkMode: false,
   font_size: 16,
   bible_translation: "American Standard Version",
   notifications: false,
@@ -35,7 +35,6 @@ const reducer = (state, action) => {
     case "SET_NOTIFICATIONS_DAYS":
       return { ...state, notificationsDays: action.payload };
     case "INITIAL_USER_STATE":
-      console.log("action.payload: ", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;
@@ -53,9 +52,7 @@ export const GlobalStateProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_THEME", payload: colorScheme });
   }, [colorScheme]);
 
-  useEffect(() => {
-    console.log("state: ", state);
-  }, [state]);
+  useEffect(() => {}, [state]);
 
   const theme = {
     colors: {

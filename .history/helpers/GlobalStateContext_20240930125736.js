@@ -11,7 +11,7 @@ const GlobalStateContext = createContext();
 const GlobalDispatchContext = createContext();
 
 const initialState = {
-  colorMode: 'light',
+  darkMode: 'light',
   font_size: 16,
   bible_translation: "American Standard Version",
   notifications: false,
@@ -23,7 +23,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "TOGGLE_THEME":
-      return { ...state, colorMode: action.payload };
+      return { ...state, darkMode: action.payload };
     case "SET_FONT_SIZE":
       return { ...state, font_size: action.payload };
     case "SET_TRANSLATION":
@@ -35,7 +35,6 @@ const reducer = (state, action) => {
     case "SET_NOTIFICATIONS_DAYS":
       return { ...state, notificationsDays: action.payload };
     case "INITIAL_USER_STATE":
-      console.log("action.payload: ", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;
