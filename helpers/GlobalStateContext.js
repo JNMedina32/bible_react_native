@@ -35,7 +35,6 @@ const reducer = (state, action) => {
     case "SET_NOTIFICATIONS_DAYS":
       return { ...state, notificationsDays: action.payload };
     case "INITIAL_USER_STATE":
-      console.log("action.payload: ", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;

@@ -69,7 +69,7 @@ export default function SettingsScreen() {
 
   const handleSave = () => {
     saveSettings(db, selectedState, dispatch);
-    // dispatch({ type: "INITIAL_USER_STATE", payload: selectedState });
+    setSettingsChanged(false);
   };
 
   useEffect(() => {
@@ -97,11 +97,11 @@ export default function SettingsScreen() {
 
   useEffect(() => {
     setSelectedState({
-      font_size: font_size,
       bible_translation: bible_translation,
+      font_size: font_size,
       notifications: notifications,
-      notification_time: notification_time,
       notification_days: notification_days,
+      notification_time: notification_time,
       user_id: user_id,
     });
   },[]);
