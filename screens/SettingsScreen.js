@@ -23,7 +23,8 @@ import ModalComponent from "../components/Modal";
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const [modalVisible, setModalVisble] = useState(false);
+  const [transitionModal, setTransitionModal] = useState(false);
+  const [notificationModal, setNotificationModal] = useState(false);
   const {
     font_size,
     theme,
@@ -62,13 +63,15 @@ export default function SettingsScreen() {
     }
   };
 
-  // const handleTranslationChange = (translation) => {
-  //   setSelectedTranslation(translation);
-  // };
-
-  // const handleNotificationsChange = () => {
-  //   setSelectedNotifications(!selectedNotifications);
-  // };
+  const handleSelection = (setting) => {
+    if(setting === "translation") {
+      setTransitionModal(!transitionModal);
+    } else if(setting === "notifications") {
+      setNotificationModal(!notificationModal);
+    } else {
+      return;
+    }
+  };
 
   const handleSave = () => {
     saveSettings(db, selectedState, dispatch);
@@ -85,7 +88,7 @@ export default function SettingsScreen() {
       testText.toVerse,
       setBookText
     );
-  }, []);
+  }, [selectedState.bible_translation]);
 
   useEffect(() => {
     if (
@@ -112,7 +115,12 @@ export default function SettingsScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ModalComponent visible={modalVisible} setModalVisible={setModalVisble} />
+      <ModalComponent
+        modalVisible={transitionModal}
+        setModalVisible={setTransitionModal}
+        selectedState={selectedState}
+        setSelectedState={setSelectedState}
+      />
       <View style={styles.menuButton}>
         <MenuButton />
       </View>
@@ -162,7 +170,7 @@ export default function SettingsScreen() {
         >
           Translation:
         </Text>
-        <Pressable>
+        <Pressable onPress={() => handleSelection("translation")}>
           <Text
             style={[
               styles.settingsText,
@@ -204,6 +212,7 @@ export default function SettingsScreen() {
           ]}
         >
           {testText.book}
+
         </Text>
         <Text
           style={[

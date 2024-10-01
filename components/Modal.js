@@ -1,10 +1,14 @@
 import { Modal, Pressable, Text, View, StyleSheet } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import PillButton from "./PillButton";
+import { useSQLiteContext } from "expo-sqlite";
 
-const ModalComponent = ({ modalVisible, setModalVisible }) => {
+
+const ModalComponent = ({ modalVisible, setModalVisible, selectedState, setSelectedState }) => {
   const { theme } = useGlobalState();
   const { colors } = theme;
+  const db = useSQLiteContext();
+  
 
   return (
     <Modal
@@ -15,7 +19,7 @@ const ModalComponent = ({ modalVisible, setModalVisible }) => {
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={styles.centeredView}>
+      <View style={[styles.centeredView, {backgroundColor: colors.background}]}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Hello World!</Text>
           <Pressable

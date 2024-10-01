@@ -2,7 +2,6 @@ import {
   createContext,
   useReducer,
   useContext,
-  useState,
   useEffect,
 } from "react";
 import { useColorScheme } from "react-native";
@@ -35,7 +34,6 @@ const reducer = (state, action) => {
     case "SET_NOTIFICATIONS_DAYS":
       return { ...state, notificationsDays: action.payload };
     case "INITIAL_USER_STATE":
-      console.log("action.payload: ", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;
@@ -46,16 +44,9 @@ export const GlobalStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const colorScheme = useColorScheme();
 
-  // console.log(colorScheme);
-  // console.log(state.colorMode);
-
   useEffect(() => {
     dispatch({ type: "TOGGLE_THEME", payload: colorScheme });
   }, [colorScheme]);
-
-  useEffect(() => {
-    console.log("state: ", state);
-  }, [state]);
 
   const theme = {
     colors: {
