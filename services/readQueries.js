@@ -8,7 +8,6 @@ async function getBibleBooks(db, translation, func) {
   const tableName = translationTableMap[translation];
 
   if (tableName) {
-    // Fetch distinct book names from the appropriate table
     const result = await db.getAllAsync(
       `SELECT DISTINCT book_name FROM ${tableName} ORDER BY id;`
     );
@@ -100,4 +99,5 @@ export {
   getVerses,
   getUserSettings,
   getNotes,
+  getBibleTranslations,
 };

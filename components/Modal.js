@@ -1,14 +1,40 @@
-import { Modal, Pressable, Text, View, StyleSheet } from "react-native";
+import { Modal, Pressable, Text, View, StyleSheet, TextInput, FlatList } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import PillButton from "./PillButton";
 import { useSQLiteContext } from "expo-sqlite";
+import { useState, useEffect } from "react";
+import { getBibleTranslations } from "../services/readQueries";
 
-
-const ModalComponent = ({ modalVisible, setModalVisible, selectedState, setSelectedState }) => {
-  const { theme } = useGlobalState();
+const ModalComponent = ({
+  modalVisible,
+  setModalVisible,
+  selectedState,
+  setSelectedState,
+  modalType,
+}) => {
+  const { theme, bible_translation, notification_time, notification_days } =
+    useGlobalState();
   const { colors } = theme;
   const db = useSQLiteContext();
-  
+  const [time, setTime] = useState("12:00"); 
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [bibleTranslations, setBibleTranslations] = useState([]);
+
+  useEffect(() => {
+    if (modalType === "translation") {
+      getBibleTranslations(db, setBibleTranslations);
+    }
+  }, [modalType]);
+
+  // useEffect(() => {
+  //   console.log(bibleTranslations);
+  // }, [modalType]);
+
+  const toggleDay = (day) => {
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
 
   return (
     <Modal
@@ -19,9 +45,55 @@ const ModalComponent = ({ modalVisible, setModalVisible, selectedState, setSelec
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={[styles.centeredView, {backgroundColor: colors.background}]}>
+      <View style={[styles.centeredView, { backgroundColor: colors.background }]}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Hello World!</Text>
+          {/* Conditionally render content based on modalType */}
+          {modalType === "translation" && (
+            <>
+              <Text style={styles.modalText}>Select Bible Translation</Text>
+              <FlatList
+                data={bibleTranslations}
+                keyExtractor={(item) => item.version_name}
+                renderItem={({ item }) => (
+                  <Pressable
+                    style={[styles.button, selectedState === item.version_name && styles.selectedButton]}
+                    onPress={() => setSelectedState(item.version_name)}
+                  >
+                    <Text style={styles.textStyle}>{item.version_name}</Text>
+                  </Pressable>
+                )}
+              />
+            </>
+          )}
+
+          {modalType === "notifications" && (
+            <>
+              <Text style={styles.modalText}>Select Notification Days</Text>
+              <View style={styles.dayContainer}>
+                {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+                  <Pressable
+                    key={day}
+                    style={[
+                      styles.dayButton,
+                      selectedDays.includes(day) && styles.selectedDayButton,
+                    ]}
+                    onPress={() => toggleDay(day)}
+                  >
+                    <Text style={styles.textStyle}>{`Day ${day}`}</Text>
+                  </Pressable>
+                ))}
+              </View>
+              <Text style={styles.modalText}>Select Notification Time</Text>
+              <TextInput
+                style={styles.timeInput}
+                value={time}
+                onChangeText={setTime}
+                placeholder="12:00"
+                keyboardType="numeric"
+              />
+            </>
+          )}
+
           <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}

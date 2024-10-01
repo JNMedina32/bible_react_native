@@ -23,8 +23,8 @@ import ModalComponent from "../components/Modal";
 export default function SettingsScreen() {
   const db = useSQLiteContext();
   const [settingsChanged, setSettingsChanged] = useState(false);
-  const [transitionModal, setTransitionModal] = useState(false);
-  const [notificationModal, setNotificationModal] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState("");
   const {
     font_size,
     theme,
@@ -63,14 +63,10 @@ export default function SettingsScreen() {
     }
   };
 
-  const handleSelection = (setting) => {
-    if(setting === "translation") {
-      setTransitionModal(!transitionModal);
-    } else if(setting === "notifications") {
-      setNotificationModal(!notificationModal);
-    } else {
-      return;
-    }
+  const handleModal = (setting) => {
+    setModalVisible(false);
+    setModalType(setting);
+    setModalVisible(true);
   };
 
   const handleSave = () => {
@@ -86,6 +82,7 @@ export default function SettingsScreen() {
       testText.chapter,
       testText.fromVerse,
       testText.toVerse,
+      selectedState.bible_translation,
       setBookText
     );
   }, [selectedState.bible_translation]);
@@ -116,10 +113,11 @@ export default function SettingsScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ModalComponent
-        modalVisible={transitionModal}
-        setModalVisible={setTransitionModal}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
         selectedState={selectedState}
         setSelectedState={setSelectedState}
+        modalType={modalType}
       />
       <View style={styles.menuButton}>
         <MenuButton />
@@ -170,7 +168,7 @@ export default function SettingsScreen() {
         >
           Translation:
         </Text>
-        <Pressable onPress={() => handleSelection("translation")}>
+        <Pressable onPress={() => handleModal("translation")}>
           <Text
             style={[
               styles.settingsText,
@@ -190,7 +188,7 @@ export default function SettingsScreen() {
         >
           Notifications:
         </Text>
-        <TouchableWithoutFeedback onPress={() => alert("Button pressed!")}>
+        <TouchableWithoutFeedback onPress={() => handleModal("notifications")}>
           <Text
             style={[
               styles.settingsText,
