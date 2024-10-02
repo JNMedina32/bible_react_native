@@ -1,7 +1,6 @@
 const translationTableMap = {
   "American Standard Version": "asvBible",
   "Authorized King James Version": "akjvBible",
-  "Reina Valera Gómez": "rvgBible",
 };
 
 async function getBibleBooks(db, translation, func) {
@@ -25,9 +24,14 @@ async function getChapters(db, book, chapter, translation, func) {
       `SELECT verse, text, chapter FROM ${tableName} WHERE book_name = ? AND chapter = ?;`,
       [book, chapter]
     );
+
+    let verseObj = {};
+    
     for (const book of result) {
-      func((prev) => prev + " " + book.verse + ". " + book.text);
+      verseObj = {...verseObj, [book.verse]: book.text};
     }
+    console.log(verseObj);
+    func(verseObj);
   } else {
     console.error("Something went wrong getting the chapters");
   }

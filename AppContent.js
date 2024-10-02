@@ -23,7 +23,7 @@ SplashScreen.preventAutoHideAsync();
 export default function AppContent() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const dispatch = useGlobalDispatch();
-  const { theme, user_id, font_size, translation } = useGlobalState();
+  const { theme, user_id } = useGlobalState();
   const { colors } = theme;
   const db = SQLite.useSQLiteContext();
 

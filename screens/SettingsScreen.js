@@ -175,7 +175,7 @@ export default function SettingsScreen() {
               { color: colors.text, fontSize: 16 + header.h4 },
             ]}
           >
-            {bible_translation}
+            {selectedState.bible_translation}
           </Text>
         </Pressable>
       </View>

@@ -10,9 +10,9 @@ export default function ReadingScreen({ route, navigation }) {
   const { book } = route.params;
   const db = useSQLiteContext();
   const [chapter, setChapter] = useState(1);
-  const [bookText, setBookText] = useState("");
+  const [bookText, setBookText] = useState({});
   const [numOfChap, setNumOfChap] = useState(0);
-  const { font_size, theme } = useGlobalState();
+  const { font_size, theme, bible_translation } = useGlobalState();
   const { header, colors } = theme;
 
   const handleChapter = (param) => {
@@ -28,12 +28,12 @@ export default function ReadingScreen({ route, navigation }) {
   
 
   useEffect(() => {
-    setBookText("");
-    getChapters(db, book, chapter, setBookText);
+    setBookText();
+    getChapters(db, book, chapter, bible_translation, setBookText);
   }, [chapter]);
 
   useEffect(() => {
-    getNumOfChap(db, book, setNumOfChap);
+    getNumOfChap(db, book, bible_translation, setNumOfChap);
   }, []);
 
   return (
@@ -41,6 +41,9 @@ export default function ReadingScreen({ route, navigation }) {
       <View style={styles.menuButton}>
         <MenuButton />
       </View>
+      <Text style={[styles.header]}>
+        {bible_translation}
+      </Text>
       <Text
         style={[
           styles.header,
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontWeight: "bold",
-    margin: 10,
+    marginBottom: 10,
     zIndex: 2,
   },
   chapter: {

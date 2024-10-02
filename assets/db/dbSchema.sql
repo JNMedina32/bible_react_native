@@ -29,14 +29,15 @@ CREATE TABLE IF NOT EXISTS akjvBible (
 );
 
 ------------------REINA VALERA GOMEZ VERSION------------------
-CREATE TABLE IF NOT EXISTS rvgBible (
-    id INTEGER PRIMARY KEY,
-    book_name TEXT,
-    book_number INTEGER,
-    chapter INTEGER,
-    verse INTEGER,
-    text TEXT
-);
+   ------NEED TO UPDATE CODE TO USE SPANISH FOR QUEIRES----
+-- CREATE TABLE IF NOT EXISTS rvgBible (
+--     id INTEGER PRIMARY KEY,
+--     book_name TEXT,
+--     book_number INTEGER,
+--     chapter INTEGER,
+--     verse INTEGER,
+--     text TEXT
+-- );
 
 ------------------BIBLE VERSIONS------------------
 CREATE TABLE IF NOT EXISTS bibleTranslations(

@@ -1,4 +1,12 @@
-import { Modal, Pressable, Text, View, StyleSheet, TextInput, FlatList } from "react-native";
+import {
+  Modal,
+  Pressable,
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  FlatList,
+} from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import PillButton from "./PillButton";
 import { useSQLiteContext } from "expo-sqlite";
@@ -12,11 +20,11 @@ const ModalComponent = ({
   setSelectedState,
   modalType,
 }) => {
-  const { theme, bible_translation, notification_time, notification_days } =
+  const { theme, notification_time, notification_days } =
     useGlobalState();
   const { colors } = theme;
   const db = useSQLiteContext();
-  const [time, setTime] = useState("12:00"); 
+  const [time, setTime] = useState("12:00");
   const [selectedDays, setSelectedDays] = useState([]);
   const [bibleTranslations, setBibleTranslations] = useState([]);
 
@@ -26,9 +34,6 @@ const ModalComponent = ({
     }
   }, [modalType]);
 
-  // useEffect(() => {
-  //   console.log(bibleTranslations);
-  // }, [modalType]);
 
   const toggleDay = (day) => {
     setSelectedDays((prev) =>
@@ -45,9 +50,10 @@ const ModalComponent = ({
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={[styles.centeredView, { backgroundColor: colors.background }]}>
+      <View
+        style={styles.centeredView}
+      >
         <View style={styles.modalView}>
-          {/* Conditionally render content based on modalType */}
           {modalType === "translation" && (
             <>
               <Text style={styles.modalText}>Select Bible Translation</Text>
@@ -56,8 +62,17 @@ const ModalComponent = ({
                 keyExtractor={(item) => item.version_name}
                 renderItem={({ item }) => (
                   <Pressable
-                    style={[styles.button, selectedState === item.version_name && styles.selectedButton]}
-                    onPress={() => setSelectedState(item.version_name)}
+                    style={[
+                      styles.button,
+                      selectedState.bible_translation === item.version_name &&
+                        styles.selectedButton,
+                    ]}
+                    onPress={() =>
+                      setSelectedState({
+                        ...selectedState,
+                        bible_translation: item.version_name,
+                      })
+                    }
                   >
                     <Text style={styles.textStyle}>{item.version_name}</Text>
                   </Pressable>
@@ -70,7 +85,7 @@ const ModalComponent = ({
             <>
               <Text style={styles.modalText}>Select Notification Days</Text>
               <View style={styles.dayContainer}>
-                {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+                {['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'].map((day) => (
                   <Pressable
                     key={day}
                     style={[
@@ -79,7 +94,7 @@ const ModalComponent = ({
                     ]}
                     onPress={() => toggleDay(day)}
                   >
-                    <Text style={styles.textStyle}>{`Day ${day}`}</Text>
+                    <Text style={styles.textStyle}>{day}</Text>
                   </Pressable>
                 ))}
               </View>
@@ -98,7 +113,7 @@ const ModalComponent = ({
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}
           >
-            <Text style={styles.textStyle}>Hide Modal</Text>
+            <Text style={styles.textStyle}>Select</Text>
           </Pressable>
         </View>
       </View>
@@ -112,12 +127,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+    
   },
   modalView: {
     margin: 20,
+    top: -90,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 4,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -127,23 +144,50 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    height: "50%",
   },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    margin: 10,
   },
   buttonClose: {
     backgroundColor: "#2196F3",
   },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  selectedButton: {
+    backgroundColor: "green",
+  },
+  textStyle: {
+    color: "white",
+    textAlign: "center",
+  },
+  dayContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 20,
+  },
+  dayButton: {
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 10,
+  },
+  selectedDayButton: {
+    backgroundColor: "#2196F3",
+  },
+  timeInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 10,
+    textAlign: "center",
+    marginBottom: 20,
   },
 });
 
