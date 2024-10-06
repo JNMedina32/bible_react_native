@@ -40,11 +40,12 @@ CREATE TABLE IF NOT EXISTS akjvBible (
 -- );
 
 ------------------BIBLE VERSIONS------------------
-CREATE TABLE IF NOT EXISTS bibleTranslations(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    version_name TEXT,
+CREATE TABLE IF NOT EXISTS translations(
+    version_name TEXT UNIQUE,
     version_code TEXT
 );
+
+INSERT INTO translations (version_name, version_code) VALUES ('American Standard Version', 'asv'), ('Authorized King James Version', 'akjv');
 
 ------------------USERS------------------
 CREATE TABLE IF NOT EXISTS users(

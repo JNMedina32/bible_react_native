@@ -69,14 +69,14 @@ async function getVerses(
       verseObj = { ...verseObj, [book_name.verse]: book_name.text };
     }
     func(verseObj);
-    console.log(verseObj);
   } else {
     console.error("Something went wrong getting the verses");
   }
 }
 
 async function getBibleTranslations(db, func) {
-  const result = await db.getAllAsync(`SELECT * FROM bibleTranslations;`);
+  const result = await db.getAllAsync(`SELECT * FROM translations;`);
+  console.log(result);
   func(result);
 }
 

@@ -111,9 +111,6 @@ export default function SettingsScreen() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(bookText);
-  }, [bookText]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

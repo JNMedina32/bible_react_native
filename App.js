@@ -14,7 +14,6 @@ export default function App() {
           <SQLite.SQLiteProvider
             databaseName="bible.db"
             assetSource={{ assetId: require("./assets/bible.db") }}
-            options={{ useNewConnection: true }}
             useSuspense={true}
           >
             <AppContent />
