@@ -41,7 +41,7 @@ export default function SettingsScreen() {
     bible_translation: "American Standard Version",
     notifications: false,
     notification_time: "12:00",
-    notification_days: [1, 2, 3, 4, 5, 6, 7],
+    notification_days: ["M", "T", "W", "Th", "F", "Sa", "Su"],
     user_id: 1,
   });
   const [bookText, setBookText] = useState({});
@@ -74,8 +74,19 @@ export default function SettingsScreen() {
     setSettingsChanged(false);
   };
 
-  useEffect(() => {
+  const handleCancel = () => {
+    setSelectedState({
+      font_size: font_size,
+      bible_translation: bible_translation,
+      notifications: notifications,
+      notification_time: notification_time,
+      notification_days: notification_days,
+      user_id: user_id,
+    });
+    setSettingsChanged(false);
+  };
 
+  useEffect(() => {
     getVerses(
       db,
       testText.book,
@@ -97,7 +108,6 @@ export default function SettingsScreen() {
     } else {
       setSettingsChanged(false);
     }
-    console.log(bookText);
   }, [selectedState]);
 
   useEffect(() => {
@@ -110,7 +120,6 @@ export default function SettingsScreen() {
       user_id: user_id,
     });
   }, []);
-
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -238,7 +247,8 @@ export default function SettingsScreen() {
                 { color: colors.text, fontSize: selectedState.font_size },
               ]}
             >
-              <Text style={{ color: "green" }}>{key}.</Text> {value}
+              <Text style={{ color: "green", fontWeight: "bold" }}>{key}.</Text>{" "}
+              {value}
               {` `}
             </Text>
           ))}
@@ -250,10 +260,7 @@ export default function SettingsScreen() {
             <PillButton text="Save" onPress={() => handleSave()} />
           </View>
           <View>
-            <PillButton
-              text="Cancel"
-              onPress={() => alert("Button pressed!")}
-            />
+            <PillButton text="Cancel" onPress={() => handleCancel()} />
           </View>
         </View>
       )}

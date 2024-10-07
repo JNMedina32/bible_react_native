@@ -1,10 +1,18 @@
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { useSQLiteContext } from "expo-sqlite";
 import PillButton from "../components/PillButton";
 import MenuButton from "../components/MenuButton";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import { getChapters, getNumOfChap } from "../services/readQueries";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function ReadingScreen({ route }) {
   const { book } = route.params;
@@ -12,6 +20,7 @@ export default function ReadingScreen({ route }) {
   const [chapter, setChapter] = useState(1);
   const [bookText, setBookText] = useState({});
   const [numOfChap, setNumOfChap] = useState(0);
+  const [displayChap, setDisplayChap] = useState(false);
   const { font_size, theme, bible_translation } = useGlobalState();
   const { header, colors } = theme;
 
@@ -37,17 +46,37 @@ export default function ReadingScreen({ route }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={[styles.menuButton, {backgroundColor: colors.background}]}>
+      <View style={[styles.menuButton, { backgroundColor: colors.background }]}>
         <MenuButton />
       </View>
-      <Text style={[styles.header]}>{bible_translation}</Text>
+      <Text style={[styles.header, { color: colors.text }]}>
+        {bible_translation}
+      </Text>
       <Text
         style={[
           styles.header,
           { color: colors.text, fontSize: font_size + header.h1 },
         ]}
       >
-        {book} | {chapter}
+        {book} | {chapter}{" "}
+        <TouchableWithoutFeedback onPress={() => setDisplayChap(true)}>
+          <FontAwesome name="caret-down" size={24} color={colors.text} />
+        </TouchableWithoutFeedback>
+        {displayChap && (
+          <ScrollView>
+            {Array.from({ length: numOfChap }, (_, i) => i + 1).map((chap) => (
+              <Pressable
+                key={chap}
+                onPress={() => {
+                  setChapter(chap);
+                  setDisplayChap(false);
+                }}
+              >
+                <Text style={{ color: colors.text }}>{chap}</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        )}
       </Text>
       <ScrollView>
         <Text
@@ -64,7 +93,8 @@ export default function ReadingScreen({ route }) {
                 { color: colors.text, fontSize: font_size },
               ]}
             >
-              <Text style={{color: "green"}}>{key}.</Text> {value}
+              <Text style={{ color: "green", fontWeight: "bold" }}>{key}.</Text>{" "}
+              {value}
               {` `}
             </Text>
           ))}
@@ -86,6 +116,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
+  },
+  headerContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   menuButton: {
     position: "absolute",

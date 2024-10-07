@@ -3,7 +3,6 @@ import {
   TextInput,
   StyleSheet,
   Pressable,
-  FlatList,
   Text,
   ScrollView,
 } from "react-native";
