@@ -9,7 +9,7 @@ import {
 import { useSQLiteContext } from "expo-sqlite";
 import { FontAwesome } from "@expo/vector-icons";
 import { useGlobalState } from "../helpers/GlobalStateContext";
-import { getBibleBooks } from "../services/readQueries";
+import { getBibleBooks, getUserSearch } from "../services/readQueries";
 import { useState, useEffect } from "react";
 
 export default function SearchBar({ placeholder, onSearch }) {
@@ -19,6 +19,9 @@ export default function SearchBar({ placeholder, onSearch }) {
   const [books, setBooks] = useState();
   const [predictiveSearch, setPredictiveSearch] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const testSearchFullVerse = "Jesus wept.";
+  const testSearchPartialVerse = "Jesus turned water into wine.";
 
   const handleChange = (text) => {
     setSearchText(text);
@@ -41,9 +44,14 @@ export default function SearchBar({ placeholder, onSearch }) {
   };
 
   const handleSearch = (searchItem) => {
+    let searchItemTrim = searchItem.trim();
     for(let book of books) {
-      if(book.book_name === searchItem) {
-        onSearch("ReadingScreen", searchItem);
+      if(book.book_name === searchItemTrim) {
+        onSearch("ReadingScreen", searchItemTrim);
+        setSearchText("");
+        break;
+      } else {
+        onSearch("SearchResultsScreen", searchItemTrim);
         setSearchText("");
         break;
       }
@@ -54,9 +62,7 @@ export default function SearchBar({ placeholder, onSearch }) {
     getBibleBooks(db, bible_translation, setBooks);
   }, []);
 
-  useEffect(() => {
-    console.log(predictiveSearch, searchText);
-  }, [predictiveSearch]);
+
 
   return (
     <View style={styles.container}>

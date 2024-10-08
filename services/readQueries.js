@@ -74,9 +74,24 @@ async function getVerses(
   }
 }
 
+async function getUserSearch(db, searchItem, translation, func){
+  const tableName = translationTableMap[translation];
+  const param = `%${searchItem}%`;
+
+  if (tableName) {
+    const result = await db.getAllAsync(
+      `SELECT book_name, verse, text, chapter FROM ${tableName} WHERE text LIKE ? ORDER BY book_name, chapter, verse, text;`,
+      [param]
+    );
+    console.log("getUserSearch results: ", result);
+    func(result);
+  } else {
+    console.error("Something went wrong getting your search");
+  }
+}
+
 async function getBibleTranslations(db, func) {
   const result = await db.getAllAsync(`SELECT * FROM translations;`);
-  console.log(result);
   func(result);
 }
 
@@ -104,4 +119,5 @@ export {
   getUserSettings,
   getNotes,
   getBibleTranslations,
+  getUserSearch,
 };

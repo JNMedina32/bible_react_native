@@ -15,7 +15,8 @@ import { getChapters, getNumOfChap } from "../services/readQueries";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function ReadingScreen({ route }) {
-  const { book } = route.params;
+  const { param } = route.params;
+  const book = param;
   const db = useSQLiteContext();
   const [chapter, setChapter] = useState(1);
   const [bookText, setBookText] = useState({});
@@ -41,6 +42,7 @@ export default function ReadingScreen({ route }) {
   }, [chapter]);
 
   useEffect(() => {
+    console.log("ReadingScreen: ", book, chapter);
     getNumOfChap(db, book, bible_translation, setNumOfChap);
   }, []);
 

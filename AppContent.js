@@ -6,6 +6,7 @@ import {
 import HomeScreen from "./screens/HomeScreen";
 import BibleBookSelectionScreen from "./screens/BibleBookSelectionScreen";
 import BookmarksScreen from "./screens/BookmarksScreen";
+import SearchResultsScreen from "./screens/SearchResultsScreen";
 import ReadingScreen from "./screens/ReadingScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import NotesScreen from "./screens/NotesScreen";
@@ -74,6 +75,11 @@ export default function AppContent() {
         <Stack.Screen
           name="BibleBookSelection"
           component={BibleBookSelectionScreen}
+          options={headerStyle}
+        />
+        <Stack.Screen
+          name="SearchResultsScreen"
+          component={SearchResultsScreen}
           options={headerStyle}
         />
         <Stack.Screen

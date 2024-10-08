@@ -10,21 +10,29 @@ import PillButton from "../components/PillButton";
 import SearchBar from "../components/SearchBar";
 import MenuButton from "../components/MenuButton";
 
-
 export default function HomeScreen({ navigation }) {
   const { font_size, theme } = useGlobalState();
   const { colors, header, height, width } = theme;
 
   const navigationHandler = (screen, param) => {
-    navigation.navigate(screen, { book: param });
+    navigation.navigate(screen, { param: param });
   };
 
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
-      style={[styles.container, { backgroundColor: colors.background}]}
+      style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <View style={[styles.inner, { backgroundColor: colors.background, minHeight: height, minWidth: width }]}>
+      <View
+        style={[
+          styles.inner,
+          {
+            backgroundColor: colors.background,
+            minHeight: height,
+            minWidth: width,
+          },
+        ]}
+      >
         <View style={styles.menuButton}>
           <MenuButton />
         </View>
@@ -41,7 +49,10 @@ export default function HomeScreen({ navigation }) {
           >
             Welcome to the Bible App
           </Text>
-          <SearchBar placeholder="Search a verse, book, chapter, or keyword" onSearch={navigationHandler}/>
+          <SearchBar
+            placeholder="Search a verse, book, chapter, or keyword"
+            onSearch={navigationHandler}
+          />
         </View>
 
         <View style={styles.mainContent}>
