@@ -14,8 +14,8 @@ export default function HomeScreen({ navigation }) {
   const { font_size, theme } = useGlobalState();
   const { colors, header, height, width } = theme;
 
-  const navigationHandler = (screen, param) => {
-    navigation.navigate(screen, { param: param });
+  const navigationHandler = (screen) => {
+    navigation.navigate(screen);
   };
 
   return (
@@ -51,7 +51,7 @@ export default function HomeScreen({ navigation }) {
           </Text>
           <SearchBar
             placeholder="Search a verse, book, chapter, or keyword"
-            onSearch={navigationHandler}
+            navigation={navigation}
           />
         </View>
 

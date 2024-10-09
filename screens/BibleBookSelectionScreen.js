@@ -67,7 +67,7 @@ export default function BibleBookSelectionScreen({ navigation }) {
                 <PillButton
                   key={index}
                   text={book}
-                  onPress={() => navigation.navigate("ReadingScreen", { book })}
+                  onPress={() => navigation.navigate("ReadingScreen", { book: book, chap: 1 })}
                 />
               ))}
           </ScrollView>

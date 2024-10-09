@@ -10,9 +10,10 @@ import { useSQLiteContext } from "expo-sqlite";
 import { FontAwesome } from "@expo/vector-icons";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import { getBibleBooks, getUserSearch } from "../services/readQueries";
+import { separateUserSearchText } from "../helpers/helperFunctons";
 import { useState, useEffect } from "react";
 
-export default function SearchBar({ placeholder, onSearch }) {
+export default function SearchBar({ placeholder, navigation }) {
   const db = useSQLiteContext();
   const { theme, bible_translation } = useGlobalState();
   const { colors } = theme;
@@ -20,8 +21,9 @@ export default function SearchBar({ placeholder, onSearch }) {
   const [predictiveSearch, setPredictiveSearch] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const testSearchFullVerse = "Jesus wept.";
-  const testSearchPartialVerse = "Jesus turned water into wine.";
+  const navigationHandler = (screen, param) => {
+    navigation.navigate(screen, param);
+  };
 
   const handleChange = (text) => {
     setSearchText(text);
@@ -43,25 +45,21 @@ export default function SearchBar({ placeholder, onSearch }) {
     setPredictiveSearch([]);
   };
 
+  let testSearch = "John 3:16";
+
   const handleSearch = (searchItem) => {
-    let searchItemTrim = searchItem.trim();
-    for(let book of books) {
-      if(book.book_name === searchItemTrim) {
-        onSearch("ReadingScreen", searchItemTrim);
-        setSearchText("");
-        break;
-      } else {
-        onSearch("SearchResultsScreen", searchItemTrim);
-        setSearchText("");
-        break;
-      }
-    }
+    // console.log("searchItem: ", `"${searchItem}"`);
+    separateUserSearchText(searchItem, books, navigationHandler);
   };
 
   useEffect(() => {
     getBibleBooks(db, bible_translation, setBooks);
   }, []);
 
+  // useEffect(() => {
+  //   separateUserSearchText(testSearch, books);
+  //   console.log("books from searchBar: ", books);
+  // }, [books]);
 
 
   return (
