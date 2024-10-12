@@ -1,0 +1,24 @@
+# Todo List for BibleF App
+
+## Features to Implement
+
+1. **Bookmarks**
+  - [ ] Add functionality to bookmark verses
+  - [ ] Create a bookmarks management screen
+  - [ ] Sync bookmarks across devices
+
+2. **Continue Reading**
+  - [ ] Implement "Continue Reading" feature
+  - [ ] Save last read position
+  - [ ] Display last read position on app launch
+
+3. **Notes**
+  - [ ] Add note-taking feature
+  - [ ] Organize notes by book and chapter
+  - [ ] Sync notes across devices
+
+## Additional Tasks
+
+- [ ] Improve UI/UX design
+- [ ] Optimize app performance
+- [ ] Conduct user testing and gather feedback
