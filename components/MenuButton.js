@@ -23,5 +23,9 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     resizeMode: "contain",
+    zIndex: 10,
+  },
+  button: {
+    borderRadius: 50,
   },
 });

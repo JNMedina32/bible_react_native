@@ -53,8 +53,8 @@ async function getVerses(
   book_name,
   chapter,
   translation,
-  fromVerse,
-  toVerse = fromVerse
+  start_verse,
+  end_verse = start_verse
 ) {
   const tableName = translationTableMap[translation];
 
@@ -62,7 +62,7 @@ async function getVerses(
     try {
       const result = await db.getAllAsync(
         `SELECT book_name, chapter, verse, text FROM ${tableName} WHERE book_name = ? AND chapter = ? AND verse BETWEEN ? AND ? ORDER BY verse ASC;`,
-        [book_name, chapter, fromVerse, toVerse]
+        [book_name, chapter, start_verse, end_verse]
       );
       let verseObj = {};
       for (const book_name of result) {

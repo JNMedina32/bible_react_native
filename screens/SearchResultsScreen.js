@@ -7,60 +7,53 @@ import {
   FlatList,
 } from "react-native";
 import MenuButton from "../components/MenuButton";
+import DisplayText from "../components/DisplayText";
 import { FontAwesome } from "@expo/vector-icons";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import { useSQLiteContext } from "expo-sqlite";
 import { useState, useEffect } from "react";
-import { getUserSearch } from "../services/readQueries";
+import { getUserSearch, getVerses } from "../services/readQueries";
 
 export default function SearchResultsScreen({ route }) {
-  const { book_name, chapter, start_verse, end_verse } = route.params;
+  const { book_name, chapter, verse_start, verse_end } = route.params;
   const db = useSQLiteContext();
   const { theme, bible_translation, font_size } = useGlobalState();
   const { colors } = theme;
-  const [searchResults, setSearchResults] = useState();
+  const [searchResults, setSearchResults] = useState({});
+
 
   useEffect(() => {
-    getUserSearch(db, searchItem, bible_translation, setSearchResults);
-  }, []);
+    let isMounted = true;
+    const handleSearchResults = async () => {
+      console.log("SearchResultsScreen: ", book_name, chapter, verse_start, verse_end);
+      const result = await getVerses(
+        db,
+        book_name,
+        chapter,
+        bible_translation,
+        verse_start,
+        verse_end
+      );
+      console.log("SearchResultsScreen results: ", result);
+      if (isMounted) {
+        setSearchResults(result);
+      }
+    };
+    handleSearchResults();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [book_name, chapter, verse_start, verse_end, bible_translation]);
 
-  useEffect(() => {
-    console.log("searchItem from SearchScreen: ", searchItem);
-    console.log("searchResults from SearchScreen: ", searchResults);
-  }, [searchResults]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={[styles.menuButton, { backgroundColor: colors.background }]}>
         <MenuButton />
       </View>
-      <View>
-        {searchResults && (
-          <FlatList
-            data={searchResults}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Pressable
-                style={styles.results}
-                onPress={() =>
-                  navigation.navigate("ReadingScreen", {
-                    book: item.book_name,
-                    chapter: item.chapter,
-                  })
-                }
-              >
-                <Text
-                  style={[
-                    styles.text,
-                    { color: colors.text, fontSize: font_size },
-                  ]}
-                >
-                  {item.book_name} {item.chapter}:{item.verse} - {item.text}
-                </Text>
-              </Pressable>
-            )}
-          />
-        )}
+      <View style={styles.results}>
+        <DisplayText bookText={searchResults}  />
       </View>
     </View>
   );
@@ -76,6 +69,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     left: 10,
+    zIndex: 10,
   },
   results: {
     padding: 10,

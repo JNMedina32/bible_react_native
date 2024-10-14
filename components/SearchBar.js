@@ -60,10 +60,10 @@ export default function SearchBar({ placeholder, navigation }) {
         });
       } else {
         navigationHandler("SearchResultsScreen", {
-          book: searchObj.book_name,
-          chap: searchObj.chapter,
-          start_verse: searchObj.start_verse,
-          end_verse: searchObj.end_verse,
+          book_name: searchObj.book_name,
+          chapter: searchObj.chapter,
+          verse_start: searchObj.verse_start,
+          verse_end: searchObj.verse_end,
         });
       }
     } else {

@@ -5,12 +5,13 @@ function parseSearchInput(input) {
 
   if (referenceMatch) {
     const { book_name, chapter, verse_start, verse_end } = referenceMatch.groups;
+    console.log("referenceMatch: ", referenceMatch.groups);
     return {
       type: "reference",
       book_name,
       chapter: parseInt(chapter),
-      verse_start: verse_start ? parseInt(verse_start) : null,
-      verse_end: verse_end ? parseInt(verse_end) : null,
+      verse_start: verse_start ? parseInt(verse_start) : 1,
+      verse_end: verse_end ? parseInt(verse_end) : verse_start ? parseInt(verse_start) : 1,
     };
   } else {
     // User is doing a text search, like "Jesus wept" or "Jesus turns water into wine"

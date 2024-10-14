@@ -1,17 +1,17 @@
 import { ScrollView, Text, StyleSheet } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 
-export default function DisplayText({ bookText, selectedState }) {
-  const { theme } = useGlobalState();
+export default function DisplayText({ bookText }) {
+  const { theme, font_size, bible_translation } = useGlobalState();
   const { colors, header } = theme;
-  return (
-    <ScrollView style={{ flex: 1 }}>
+    return (
+    <ScrollView style={{ flex: 1, top: 50 }}>
       <Text
         style={[
           styles.header,
           {
             color: colors.text,
-            fontSize: selectedState.font_size + header.h1,
+            fontSize: font_size + header.h1,
           },
         ]}
       >
@@ -21,7 +21,7 @@ export default function DisplayText({ bookText, selectedState }) {
             styles.chapter,
             {
               color: colors.text,
-              fontSize: selectedState.font_size + header.h2,
+              fontSize: font_size + header.h2,
             },
           ]}
         >
@@ -31,7 +31,7 @@ export default function DisplayText({ bookText, selectedState }) {
       <Text
         style={[
           styles.mainContent,
-          { color: colors.text, fontSize: selectedState.font_size },
+          { color: colors.text, fontSize: font_size },
         ]}
       >
         {Object.entries(bookText)
@@ -41,7 +41,7 @@ export default function DisplayText({ bookText, selectedState }) {
               key={key}
               style={[
                 styles.mainContent,
-                { color: colors.text, fontSize: selectedState.font_size },
+                { color: colors.text, fontSize: font_size },
               ]}
             >
               <Text style={{ color: "green", fontWeight: "bold" }}>{key}.</Text>{" "}
