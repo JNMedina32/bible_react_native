@@ -66,7 +66,12 @@ async function getVerses(
       );
       let verseObj = {};
       for (const book_name of result) {
-        verseObj = { ...verseObj, book_name: book_name.book_name, chapter: book_name.chapter, [book_name.verse]: book_name.text };
+        verseObj = {
+          ...verseObj,
+          book_name: book_name.book_name,
+          chapter: book_name.chapter,
+          [book_name.verse]: book_name.text,
+        };
       }
       return verseObj;
     } catch (error) {
@@ -84,8 +89,16 @@ async function getUserSearch(db, searchItem, translation, func) {
       `SELECT book_name, verse, text, chapter FROM ${tableName} WHERE text LIKE ? ORDER BY book_name, chapter, verse, text;`,
       [param]
     );
-    console.log("getUserSearch results: ", result);
-    func(result);
+    let verseObj = {};
+    for (const book_name of result) {
+      verseObj = {
+        ...verseObj,
+        book_name: book_name.book_name,
+        chapter: book_name.chapter,
+        [book_name.verse]: book_name.text,
+      };
+    }
+    return verseObj;
   } else {
     console.error("Something went wrong getting your search");
   }

@@ -35,9 +35,7 @@ export default function SearchBar({ placeholder, navigation }) {
       let result = books.filter((book) =>
         book.book_name.toLowerCase().includes(text.toLowerCase())
       );
-
       result = result.sort((a, b) => a.book_name.localeCompare(b.book_name));
-
       setPredictiveSearch(result);
     } else {
       setPredictiveSearch([]);
@@ -51,9 +49,8 @@ export default function SearchBar({ placeholder, navigation }) {
 
   const handleSearch = (searchItem) => {
     const searchObj = parseSearchInput(searchItem);
-    let searchResults = [];
     if (searchObj.type === "reference") {
-      if (searchObj.verse_start === null) {
+      if (searchObj.verse_start === 1) {
         navigationHandler("ReadingScreen", {
           book: searchObj.book_name,
           chap: searchObj.chapter,
@@ -64,11 +61,12 @@ export default function SearchBar({ placeholder, navigation }) {
           chapter: searchObj.chapter,
           verse_start: searchObj.verse_start,
           verse_end: searchObj.verse_end,
+          search: "reference",
         });
       }
     } else {
-      getUserSearch(db, searchObj.query, bible_translation, (result) => {
-        navigationHandler("SearchResultsScreen", { searchResults: result });
+      navigationHandler("SearchResultsScreen", {
+        search: searchObj.query,
       });
     }
     setSearchText("");

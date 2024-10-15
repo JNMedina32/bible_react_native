@@ -15,45 +15,60 @@ import { useState, useEffect } from "react";
 import { getUserSearch, getVerses } from "../services/readQueries";
 
 export default function SearchResultsScreen({ route }) {
-  const { book_name, chapter, verse_start, verse_end } = route.params;
+  const { book_name, chapter, verse_start, verse_end, search } = route.params;
   const db = useSQLiteContext();
   const { theme, bible_translation, font_size } = useGlobalState();
   const { colors } = theme;
   const [searchResults, setSearchResults] = useState({});
 
-
   useEffect(() => {
     let isMounted = true;
-    const handleSearchResults = async () => {
-      console.log("SearchResultsScreen: ", book_name, chapter, verse_start, verse_end);
-      const result = await getVerses(
-        db,
-        book_name,
-        chapter,
-        bible_translation,
-        verse_start,
-        verse_end
-      );
-      console.log("SearchResultsScreen results: ", result);
-      if (isMounted) {
-        setSearchResults(result);
-      }
-    };
-    handleSearchResults();
-    
+    if(search === "reference") {
+      const handleSearchResults = async () => {
+        console.log(
+          "SearchResultsScreen: ",
+          book_name,
+          chapter,
+          verse_start,
+          verse_end
+        );
+        const result = await getVerses(
+          db,
+          book_name,
+          chapter,
+          bible_translation,
+          verse_start,
+          verse_end
+        );
+        console.log("SearchResultsScreen results: ", result);
+        if (isMounted) {
+          setSearchResults(result);
+        }
+      };
+      handleSearchResults();
+    } else {
+      const handleUserSearch = async () => {
+        const result = await getUserSearch(db, search, bible_translation);
+        console.log("SearchResultsScreen results: ", result);
+        if (isMounted) {
+          setSearchResults(result);
+        }
+      };
+      handleUserSearch();
+    }
+
     return () => {
       isMounted = false;
     };
-  }, [book_name, chapter, verse_start, verse_end, bible_translation]);
-
+  }, [book_name, chapter, verse_start, verse_end, bible_translation, search]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={[styles.menuButton, { backgroundColor: colors.background }]}>
+      <View style={styles.menuButton}>
         <MenuButton />
       </View>
       <View style={styles.results}>
-        <DisplayText bookText={searchResults}  />
+        <DisplayText bookText={searchResults} />
       </View>
     </View>
   );

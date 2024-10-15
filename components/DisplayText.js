@@ -1,11 +1,24 @@
 import { ScrollView, Text, StyleSheet } from "react-native";
 import { useGlobalState } from "../helpers/GlobalStateContext";
+import PillButton from "./PillButton";
 
 export default function DisplayText({ bookText }) {
   const { theme, font_size, bible_translation } = useGlobalState();
   const { colors, header } = theme;
+
     return (
     <ScrollView style={{ flex: 1, top: 50 }}>
+      <Text
+        style={[
+          styles.header,
+          {
+            color: colors.text,
+            fontSize: font_size,
+          },
+        ]}
+      >
+        {bible_translation}
+      </Text>
       <Text
         style={[
           styles.header,
