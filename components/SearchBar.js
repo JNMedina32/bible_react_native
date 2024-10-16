@@ -11,8 +11,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useGlobalState } from "../helpers/GlobalStateContext";
 import {
   getBibleBooks,
-  getUserSearch,
-  getVerses,
 } from "../services/readQueries";
 import { parseSearchInput } from "../helpers/helperFunctons";
 import { useState, useEffect } from "react";

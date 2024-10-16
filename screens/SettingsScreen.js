@@ -88,14 +88,15 @@ export default function SettingsScreen() {
   };
 
   useEffect(() => {
-    const getTestVerse = async () => getVerses(
-      db,
-      testText.book,
-      testText.chapter,
-      selectedState.bible_translation,
-      testText.fromVerse,
-      testText.toVerse
-    );
+    const getTestVerse = async () =>
+      getVerses(
+        db,
+        testText.book,
+        testText.chapter,
+        selectedState.bible_translation,
+        testText.fromVerse,
+        testText.toVerse
+      );
     getTestVerse().then((result) => setBookText(result));
   }, [selectedState.bible_translation]);
 

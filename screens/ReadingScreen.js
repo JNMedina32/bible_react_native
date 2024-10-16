@@ -16,7 +16,6 @@ import { FontAwesome } from "@expo/vector-icons";
 
 export default function ReadingScreen({ route }) {
   const { book, chap } = route.params;
-  const verseRefs = useRef([]);
   const scrollViewRef = useRef(null);
   const db = useSQLiteContext();
   const [chapter, setChapter] = useState(chap);

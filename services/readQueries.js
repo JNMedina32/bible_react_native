@@ -80,7 +80,7 @@ async function getVerses(
   }
 }
 
-async function getUserSearch(db, searchItem, translation, func) {
+async function getUserSearch(db, searchItem, translation) {
   const tableName = translationTableMap[translation];
   const param = `%${searchItem}%`;
 
